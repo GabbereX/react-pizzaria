@@ -1,0 +1,22 @@
+.logo {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-right: 20px;
+  &Image {
+    margin-right: 15px;
+    animation: spin 10s linear infinite;
+  }
+  &Text {
+    text-transform: uppercase;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

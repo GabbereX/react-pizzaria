@@ -1,0 +1,14 @@
+.authorization {
+  margin-left: auto;
+  margin-right: 30px;
+  color: var(--middle-gray);
+  font-size: 15px;
+  font-weight: 700;
+  transition: color 0.3s ease;
+  &:hover {
+    color: var(--orange);
+  }
+  &:active {
+    color: var(--red)
+  }
+}

@@ -1,0 +1,18 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  padding-left: 60px;
+  color: var(--middle-gray);
+  font-weight: 700;
+  &Top {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  &Bottom {
+    font-size: 14px;
+  }
+  &Red {
+    color: var(--orange);
+  }
+}

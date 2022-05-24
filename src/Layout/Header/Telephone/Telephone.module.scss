@@ -1,0 +1,12 @@
+.telephone {
+  color: var(--orange);
+  font-size: 26px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  &:hover {
+    color: var(--red);
+  }
+  &:active {
+    color: var(--yellow);
+  }
+}

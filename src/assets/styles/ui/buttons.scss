@@ -1,0 +1,32 @@
+.light-gray-button {
+  padding-top: 3px;
+  color: var(--middle-gray);
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--light-gray);
+  border-radius: 28px;
+  transition: background 0.4s ease, color 0.3s ease, transform 0.2s ease;
+  &:hover {
+    color: #fff;
+    background: var(--red);
+  }
+  &:active {
+    transform: scale(0.97, 0.97);
+  }
+}
+
+.orange-button {
+  padding-top: 3px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--orange);
+  border-radius: 8px;
+  transition: background 0.4s ease, transform 0.2s ease;
+  &:hover {
+    background: var(--red);
+  }
+  &:active {
+    transform: scale(0.97, 0.97);
+  }
+}

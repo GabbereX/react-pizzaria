@@ -1,0 +1,39 @@
+.goodsItem {
+  border: 1px solid var(--yellow);
+  border-radius: 10px;
+  &Image {
+  }
+  &Info {
+    padding: 15px;
+  }
+  &Title {
+    display: -webkit-box;
+    margin-bottom: 18px;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 24px;
+    line-height: 28px;
+  }
+  &Description {
+    display: -webkit-box;
+    margin-bottom: 23px;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-height: 19px;
+  }
+  &Price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &Cost {
+    color: var(--black);
+    font-size: 22px;
+    font-weight: 700;
+  }
+  &Order {
+    padding: 8px 23px 7px 23px;
+  }
+}

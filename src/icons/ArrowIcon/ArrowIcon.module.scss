@@ -1,0 +1,15 @@
+.arrowIcon {
+  position: relative;
+  width: 12px;
+  left: -7px;
+  top: -1px;
+  fill: var(--middle-gray);
+  cursor: pointer;
+  transition: fill 0.3s ease;
+  &:hover {
+    fill: var(--orange);
+  }
+  &:active {
+    fill: var(--red);
+  }
+}
