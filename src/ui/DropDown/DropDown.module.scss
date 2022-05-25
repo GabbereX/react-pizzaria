@@ -1,0 +1,25 @@
+.dropDownEnter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.dropDownEnterActive {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.dropDownExit {
+  opacity: 1;
+}
+.dropDownExitActive {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.buttonDropDownEnter {
+  transform: scale(0, 0);
+}
+.buttonDropDownEnterActive {
+  transform: scale(1, 1);
+  transition: transform 300ms;
+}

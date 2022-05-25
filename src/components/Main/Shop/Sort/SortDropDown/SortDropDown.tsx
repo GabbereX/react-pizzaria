@@ -4,14 +4,12 @@ import styles from './SortDropDown.module.scss';
 interface IProps {
   sortButtons: Array<string>;
   handlerClick: (id: number) => void;
-  dropDownActive: () => void;
   sortChechedId: number;
 }
 
 const SortDropDown: FC<IProps> = ({
   sortButtons,
   handlerClick,
-  dropDownActive,
   sortChechedId,
 }) => {
   return (
@@ -23,10 +21,9 @@ const SortDropDown: FC<IProps> = ({
               key={sortButtonId}
               onClick={() => {
                 handlerClick(id);
-                dropDownActive();
               }}
               className={styles.sortDropDownItem}
-              style={{ display: sortChechedId === id ? 'none' : '' }}
+              style={{ background: sortChechedId === id ? '#ffe368' : '' }}
             >
               {sortButtonId}
             </li>

@@ -3,14 +3,19 @@
   &List {
     position: absolute;
     right: 0;
-    top: 15px;
+    top: 5px;
+    min-width: 114px;
+    max-width: 114px;
+    text-align: center;
     background: #fff;
     border: 1px solid var(--yellow);
     border-radius: 5px;
+
   }
   &Item {
     padding: 7px;
     cursor: pointer;
+    transition: background 0.3s ease;
     &:hover, &:active {
       background: var(--yellow);
     }
