@@ -1,0 +1,18 @@
+.sortDropDown {
+  position: relative;
+  &List {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    background: #fff;
+    border: 1px solid var(--yellow);
+    border-radius: 5px;
+  }
+  &Item {
+    padding: 7px;
+    cursor: pointer;
+    &:hover, &:active {
+      background: var(--yellow);
+    }
+  }
+}

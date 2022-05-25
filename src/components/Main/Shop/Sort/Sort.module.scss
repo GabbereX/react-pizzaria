@@ -4,6 +4,8 @@
   margin-left: auto;
   font-weight: 600;
   &Checked {
+    min-width: 100px;
+    max-width: 100px;
     font-size: inherit;
     color: var(--orange);
     text-decoration: underline dotted;
