@@ -1,15 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { fetchData } from './reducers/fetchData';
+import { requestAPI } from './reducers/requestAPI';
 
 const rootReducer = combineReducers({
-  [fetchData.reducerPath]: fetchData.reducer,
+  [requestAPI.reducerPath]: requestAPI.reducer,
 });
 
 const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(fetchData.middleware),
+      getDefaultMiddleware().concat(requestAPI.middleware),
   });
 };
 

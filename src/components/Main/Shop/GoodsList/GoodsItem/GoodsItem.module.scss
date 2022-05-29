@@ -2,6 +2,7 @@
   border: 1px solid var(--yellow);
   border-radius: 10px;
   &Image {
+    padding: 0 5px;
   }
   &Info {
     padding: 15px;
@@ -9,6 +10,9 @@
   &Title {
     display: -webkit-box;
     margin-bottom: 18px;
+    min-height: 56px;
+    max-height: 56px;
+    text-align: center;
     overflow: hidden;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -18,6 +22,9 @@
   &Description {
     display: -webkit-box;
     margin-bottom: 23px;
+    min-height: 76px;
+    max-height: 76px;
+    text-align: center;
     overflow: hidden;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;

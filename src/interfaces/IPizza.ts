@@ -5,7 +5,7 @@ export interface IPizza {
   description: string;
   types: Array<number>;
   sizes: Array<number>;
-  prise: number;
+  price: number;
   category: number;
   rating: number;
 }

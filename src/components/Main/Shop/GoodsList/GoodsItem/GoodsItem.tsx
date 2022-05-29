@@ -1,19 +1,22 @@
 import React, { FC } from 'react';
 import styles from './GoodsItem.module.scss';
-import pizza01 from '../../../../../assets/images/pizza/01.webp';
+import { IPizza } from '../../../../../interfaces/IPizza';
 
-const GoodsItem: FC = () => {
+interface IData {
+  data: IPizza;
+}
+
+const GoodsItem: FC<IData> = ({ data }) => {
+  const { imageUrl, title, description, price } = data;
+
   return (
     <li className={styles.goodsItem}>
-      <img src={pizza01} alt='Пицца 01' className={styles.goodsItemImage} />
+      <img src={imageUrl} alt={title} className={styles.goodsItemImage} />
       <div className={styles.goodsItemInfo}>
-        <h3 className={styles.goodsItemTitle}>С креветками и трюфелями</h3>
-        <p className={styles.goodsItemDescription}>
-          Домашнаяя паста феттуччине, сливочный соус, креветки, трюфельное
-          масло, черный перец, пармезан.350 г
-        </p>
+        <h3 className={styles.goodsItemTitle}>{title}</h3>
+        <p className={styles.goodsItemDescription}>{description}</p>
         <div className={styles.goodsItemPrice}>
-          <div className={styles.goodsItemCost}>от 600 ₽</div>
+          <div className={styles.goodsItemCost}>от {price} ₽</div>
           <button className={`${styles.goodsItemOrder} orange-button`}>
             Заказать
           </button>
