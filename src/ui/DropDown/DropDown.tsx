@@ -49,6 +49,8 @@ const DropDown: FC<IDropDownProps> = ({ button, children, keyValue }) => {
         classNames={{
           enter: styles.buttonDropDownEnter,
           enterActive: styles.buttonDropDownEnterActive,
+          exit: styles.buttondropDownExit,
+          exitActive: styles.buttondropDownExitActive,
         }}
       >
         <div ref={buttonRef}>{button}</div>

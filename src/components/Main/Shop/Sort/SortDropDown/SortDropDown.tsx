@@ -20,7 +20,9 @@ const SortDropDown: FC<IProps> = ({
             <li
               key={sortButtonId}
               onClick={() => {
-                handlerClick(id);
+                setTimeout(() => {
+                  handlerClick(id);
+                }, 150);
               }}
               className={styles.sortDropDownItem}
               style={{ background: sortChechedId === id ? '#ffe368' : '' }}

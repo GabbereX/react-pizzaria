@@ -9,10 +9,6 @@ const Sort: FC = () => {
 
   const sortButtons = ['популярности', 'цене', 'алфавиту'];
 
-  const handlerClick = (id: number) => {
-    setSortCheckedId(id);
-  };
-
   return (
     <div className={styles.sort}>
       <ArrowIcon />
@@ -27,7 +23,7 @@ const Sort: FC = () => {
       >
         <SortDropDown
           sortButtons={sortButtons}
-          handlerClick={handlerClick}
+          handlerClick={(id: number) => setSortCheckedId(id)}
           sortChechedId={sortChechedId}
         />
       </DropDown>
