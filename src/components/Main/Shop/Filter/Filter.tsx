@@ -1,9 +1,12 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from './Filter.module.scss';
 
-const Filter: FC = () => {
-  const [filterButtonId, setFilterButtonId] = useState<number>(0);
+interface IFilter {
+  handlerFilter: (id: number) => void;
+  filterId: number;
+}
 
+const Filter: FC<IFilter> = ({ handlerFilter, filterId }) => {
   const filterButtons = [
     'Все',
     'Мясные',
@@ -19,9 +22,9 @@ const Filter: FC = () => {
         return (
           <button
             key={id}
-            onClick={() => setFilterButtonId(id)}
+            onClick={() => handlerFilter(id)}
             className={`${styles.filterButton} ${
-              filterButtonId === id ? `${styles.active}` : ''
+              filterId === id ? `${styles.active}` : ''
             } light-gray-button`}
           >
             {buttonText}

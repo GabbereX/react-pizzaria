@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import styles from './Main.module.scss';
-import Shop from "./Shop/Shop";
+import React, { FC, Fragment } from 'react';
+// import styles from './Main.module.scss';
+import Shop from './Shop/Shop';
 
 const Main: FC = () => {
   return (
-    <main className={styles.main}>
-        <Shop />
-    </main>
+    <Fragment>
+      <Shop />
+    </Fragment>
   );
 };
 
