@@ -12,15 +12,17 @@ const Header: FC = () => {
   return (
     <header className={styles.header}>
       <div className={`${styles.headerContainer} container`}>
-        <Logo />
-        <Info />
-        <CallRequest />
-        <Telephone />
-      </div>
-      <div className={`${styles.headerContainer} container`}>
-        <Navigation />
-        <Authorization />
-        <Basket />
+        <div className={styles.headerTop}>
+          <Logo />
+          <Info />
+          <CallRequest />
+          <Telephone />
+        </div>
+        <div className={styles.headerBottom}>
+          <Navigation />
+          <Authorization />
+          <Basket />
+        </div>
       </div>
     </header>
   );

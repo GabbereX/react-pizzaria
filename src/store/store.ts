@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { requestAPI } from './reducers/requestAPI';
 
-const rootReducer = combineReducers({
+export const reducers = {
   [requestAPI.reducerPath]: requestAPI.reducer,
-});
+};
+
+const rootReducer = combineReducers(reducers);
 
 const setupStore = () => {
   return configureStore({

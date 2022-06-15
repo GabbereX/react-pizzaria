@@ -1,12 +1,4 @@
-import React, {
-  createRef,
-  FC,
-  ReactNode,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import styles from './DropDown.module.scss';
 import { CSSTransition } from 'react-transition-group';
 
@@ -18,11 +10,11 @@ interface IDropDownProps {
 
 const DropDown: FC<IDropDownProps> = ({ button, children, keyValue }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const wraperRef = useRef<HTMLDivElement>(null);
-  const buttonRef: RefObject<HTMLDivElement> = createRef();
-  const listRef: RefObject<HTMLDivElement> = createRef();
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const handleOpen = () => {
     setIsDropDownOpen(!isDropDownOpen);
@@ -41,7 +33,7 @@ const DropDown: FC<IDropDownProps> = ({ button, children, keyValue }) => {
   }, [isDropDownOpen]);
 
   return (
-    <div key={keyValue} onClick={handleOpen} ref={wraperRef}>
+    <div key={keyValue} ref={wraperRef} onClick={handleOpen}>
       <CSSTransition
         nodeRef={buttonRef}
         in={isChecked}

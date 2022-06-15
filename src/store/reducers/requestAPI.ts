@@ -12,7 +12,7 @@ export const requestAPI = createApi({
     baseUrl: 'https://628ed24a0e69410599d0fe4d.mockapi.io',
   }),
   endpoints: build => ({
-    fetchData: build.query<IPizza[], IParams>({
+    getPizzas: build.query<IPizza[], IParams>({
       query: ({ category }) => {
         const params: IParams = {};
 
