@@ -6,7 +6,7 @@ import Telephone from '../../simple/Telephone/Telephone';
 import Authorization from '../../simple/Authorization/Authorization';
 import Logo from '../../simple/Logo/Logo';
 import Basket from '../../simple/Basket/Basket';
-import Navigation from '../Navigation/Navigation';
+import NavigationContainer from '../../../containers/NavigationContainer/NavigationContainer';
 
 const Header: FC = () => {
   return (
@@ -19,7 +19,7 @@ const Header: FC = () => {
           <Telephone />
         </div>
         <div className={styles.headerBottom}>
-          <Navigation />
+          <NavigationContainer />
           <Authorization />
           <Basket />
         </div>

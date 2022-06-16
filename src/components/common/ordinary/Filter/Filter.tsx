@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styles from './Filter.module.scss';
+import { filterList } from '../../../../core/constants/filterList';
 
 interface IFilter {
   handlerFilter: (id: number) => void;
@@ -7,18 +8,9 @@ interface IFilter {
 }
 
 const Filter: FC<IFilter> = ({ handlerFilter, filterId }) => {
-  const filterButtons = [
-    'Все',
-    'Мясные',
-    'Вегетарианские',
-    'C Морепродуктами',
-    'Острые',
-    'Сладкие',
-  ];
-
   return (
     <div className={styles.filter}>
-      {filterButtons.map((buttonText, id) => {
+      {filterList.map((buttonText, id) => {
         return (
           <button
             key={id}

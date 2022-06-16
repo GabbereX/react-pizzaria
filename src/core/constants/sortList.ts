@@ -1,0 +1,1 @@
+export const sortButtons: string[] = ['популярности', 'цене', 'алфавиту'];

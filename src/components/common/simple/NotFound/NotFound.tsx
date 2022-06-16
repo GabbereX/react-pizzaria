@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../../ordinary/Navigation/Navigation.module.scss';
+import styles from '../Navigation/Navigation.module.scss';
 import {
   GO_TO_MAIN,
   PAGE_NOT_FOUND,

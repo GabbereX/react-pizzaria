@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { requestAPI } from './reducers/requestAPI';
+import paramsSlice from './reducers/paramsSlice';
 
 export const reducers = {
   [requestAPI.reducerPath]: requestAPI.reducer,
+  paramsSlice,
 };
 
 const rootReducer = combineReducers(reducers);

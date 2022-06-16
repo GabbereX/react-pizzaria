@@ -3,11 +3,10 @@ import styles from './Sort.module.scss';
 import ArrowIcon from '../../icons/ArrowIcon/ArrowIcon';
 import SortDropDown from '../SortDropDown/SortDropDown';
 import DropDown from '../../ui/DropDown/DropDown';
+import { sortButtons } from '../../../../core/constants/sortList';
 
 const Sort: FC = () => {
   const [sortChechedId, setSortCheckedId] = useState<number>(0);
-
-  const sortButtons = ['популярности', 'цене', 'алфавиту'];
 
   return (
     <div className={styles.sort}>
