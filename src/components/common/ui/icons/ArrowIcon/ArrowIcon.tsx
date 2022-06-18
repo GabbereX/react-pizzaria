@@ -1,17 +1,18 @@
 import React, { FC } from 'react';
 import styles from './ArrowIcon.module.scss';
+import { useAppDispatch, useAppSelector } from '../../../../../core/hooks/redux';
+import { paramsState } from '../../../../../core/store/reducers/paramsSlice';
 
 const ArrowIcon: FC = () => {
+  const { order } = useAppSelector(paramsState);
+  const { setOrder } = useAppDispatch();
+
   return (
     <svg
-      version='1.1'
-      xmlns='http://www.w3.org/2000/svg'
-      xmlnsXlink='http://www.w3.org/1999/xlink'
-      x='0px'
-      y='0px'
       viewBox='0 0 300.003 300.003'
-      xmlSpace='preserve'
       className={styles.arrowIcon}
+      style={{ transform: order ? 'rotate(180deg)' : 'rotate(0)' }}
+      onClick={() => setOrder(null)}
     >
       <path
         d='M150,0C67.159,0,0.001,67.159,0.001,150c0,82.838,67.157,150.003,149.997,150.003S300.002,232.838,300.002,150

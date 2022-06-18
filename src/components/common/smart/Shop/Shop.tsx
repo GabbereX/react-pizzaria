@@ -1,17 +1,17 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import styles from './Shop.module.scss';
-import Filter from '../../ordinary/Filter/Filter';
-import Sort from '../../ordinary/Sort/Sort';
+import Filter from '../Filter/Filter';
+import Sort from '../Sort/Sort';
 import GoodsList from '../../ordinary/GoodsList/GoodsList';
 import ErrorResponse from '../../simple/ErrorResponse/ErrorResponse';
-import { requestAPI } from '../../../../core/store/reducers/requestAPI';
 import { useLocation } from 'react-router-dom';
+import { paramsState } from '../../../../core/store/reducers/paramsSlice';
+import { requestAPI } from '../../../../core/store/reducers/requestAPI';
+import { useAppSelector } from '../../../../core/hooks/redux';
 
 const Shop: FC = () => {
-  const [filterId, setFilterId] = useState<number>(0);
-  const { data, isFetching, error } = requestAPI.useGetPizzasQuery({
-    category: filterId,
-  });
+  const params = useAppSelector(paramsState);
+  const { data, isFetching, error } = requestAPI.useGetPizzasQuery(params);
   const shopSelectionRef = useRef<HTMLAnchorElement>(null);
   const location = useLocation();
 
@@ -25,16 +25,12 @@ const Shop: FC = () => {
     }
   }, [location]);
 
-  const handlerFilter = (id: number) => {
-    setFilterId(id);
-  };
-
   return (
     <section ref={shopSelectionRef} className={`${styles.section} container`}>
       <div className={`${styles.container}`}>
         <h2 className='title'>Выбрать пиццу</h2>
         <div className={styles.shopSortAndFilter}>
-          <Filter handlerFilter={handlerFilter} filterId={filterId} />
+          <Filter />
           <Sort />
         </div>
         {!error ? (

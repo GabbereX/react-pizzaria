@@ -37,7 +37,7 @@ const DropDown: FC<IDropDownProps> = ({ button, children, keyValue }) => {
       <CSSTransition
         nodeRef={buttonRef}
         in={isChecked}
-        timeout={300}
+        timeout={200}
         classNames={{
           enter: styles.buttonDropDownEnter,
           enterActive: styles.buttonDropDownEnterActive,
