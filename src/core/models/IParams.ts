@@ -5,7 +5,7 @@ export interface IParams {
 }
 
 export interface IOptimizedParams {
-  category?: number;
+  category?: string;
   sortBy?: string;
   order?: string;
 }

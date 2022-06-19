@@ -10,7 +10,7 @@ const optimizationParams: TOptimizationParams = params => {
     order: order ? 'desc' : 'asc',
   };
 
-  category !== 0 && (optimizedParams.category = category);
+  category !== 0 && (optimizedParams.category = String(category));
 
   return optimizedParams;
 };

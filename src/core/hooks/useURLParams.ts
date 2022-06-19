@@ -1,52 +1,39 @@
-import { RefObject, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from './redux';
+import { RefObject, useEffect } from 'react';
 import { paramsState } from '../store/reducers/paramsSlice';
+import { entryState } from '../store/reducers/entrySlice';
+import { useAppDispatch, useAppSelector } from './redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import getAllParams from './getAllParams';
 import optimizationParams from '../utils/optimizationParams';
 import scrollIntoViewRef from '../utils/scrollIntoViewRef';
 
 const useURLParams = (shopSelectionRef: RefObject<HTMLAnchorElement>) => {
-  const [firstEntry, setFirstEntry] = useState<boolean>(true);
+  const entry = useAppSelector(entryState);
   const params = useAppSelector(paramsState);
-  const { setParams } = useAppDispatch();
+  const { setParams, setEntry } = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
-  const setURLParams = () => {
+  const editURLParams = () => {
     const optimizedParams = optimizationParams(params);
-
-    const optimizedSearchParams = {
-      ...optimizedParams,
-      category: optimizedParams.category
-        ? String(optimizedParams.category)
-        : '0',
-    };
-
-    setSearchParams(optimizedSearchParams);
+    setSearchParams({ ...optimizedParams });
   };
 
   useEffect(() => {
-    if (location.search && firstEntry) {
+    if (!entry && location.search) {
       const URLParams = getAllParams(searchParams);
       setParams(URLParams);
       scrollIntoViewRef(shopSelectionRef);
     }
-    setFirstEntry(false);
+    setEntry();
   }, []);
 
   useEffect(() => {
-    if (!firstEntry) {
-      setURLParams();
+    if (entry) {
+      editURLParams();
+      location.hash === '#check-pizza' && scrollIntoViewRef(shopSelectionRef);
     }
-  }, [params]);
-
-  useEffect(() => {
-    if (location.hash) {
-      scrollIntoViewRef(shopSelectionRef);
-      setURLParams();
-    }
-  }, [location]);
+  }, [params, location.hash, location.search]);
 
   return [params];
 };

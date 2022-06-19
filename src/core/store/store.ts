@@ -1,14 +1,17 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { requestAPI } from './reducers/requestAPI';
+import entrySlice, { entryAction } from './reducers/entrySlice';
 import paramsSlice, { paramsActions } from './reducers/paramsSlice';
 
 export const actionsRoot = {
   ...paramsActions,
+  ...entryAction,
 };
 
 export const reducers = {
   [requestAPI.reducerPath]: requestAPI.reducer,
   paramsSlice,
+  entrySlice,
 };
 
 const rootReducer = combineReducers(reducers);
