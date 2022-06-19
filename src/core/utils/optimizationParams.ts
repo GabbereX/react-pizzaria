@@ -1,10 +1,4 @@
-import { IParams } from '../models/IParams';
-
-interface IOptimizedParams {
-  sortBy: string;
-  order: string;
-  category?: number;
-}
+import { IOptimizedParams, IParams } from '../models/IParams';
 
 type TOptimizationParams = (params: IParams) => IOptimizedParams;
 

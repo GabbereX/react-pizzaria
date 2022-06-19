@@ -12,6 +12,11 @@ const paramsSlice = createSlice({
   name: 'paramsSlice',
   initialState,
   reducers: {
+    setParams(state, action: PayloadAction<IParams>) {
+      state.category = action.payload.category;
+      state.sortBy = action.payload.sortBy;
+      state.order = action.payload.order;
+    },
     setFilter(state, action: PayloadAction<number>) {
       state.category = action.payload;
     },
