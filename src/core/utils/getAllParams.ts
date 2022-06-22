@@ -1,4 +1,4 @@
-type TGetAllParams = Record<string | symbol, string | number | boolean>;
+type TGetAllParams = Record<string, string | number | boolean>;
 
 const getAllParams = (searchParams: URLSearchParams) => {
   const params: TGetAllParams = {};

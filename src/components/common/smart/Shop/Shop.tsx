@@ -1,15 +1,16 @@
-import React, {FC, useRef} from 'react';
+import React, { FC, useRef } from 'react';
 import styles from './Shop.module.scss';
 import Filter from '../Filter/Filter';
 import Sort from '../Sort/Sort';
 import GoodsList from '../../ordinary/GoodsList/GoodsList';
 import ErrorResponse from '../../simple/ErrorResponse/ErrorResponse';
 import { requestAPI } from '../../../../core/store/reducers/requestAPI';
-import useURLParams from "../../../../core/hooks/useURLParams";
+import useURLParams from '../../../../core/hooks/useURLParams';
+import Search from '../Search/Search';
 
 const Shop: FC = () => {
   const shopSelectionRef = useRef<HTMLAnchorElement>(null);
-  const [params] = useURLParams(shopSelectionRef)
+  const [params] = useURLParams(shopSelectionRef);
   const { data, isFetching, error } = requestAPI.useGetPizzasQuery(params);
 
   return (
@@ -20,6 +21,7 @@ const Shop: FC = () => {
           <Filter />
           <Sort />
         </div>
+        <Search />
         {!error ? (
           <GoodsList data={data} isFetching={isFetching} />
         ) : (

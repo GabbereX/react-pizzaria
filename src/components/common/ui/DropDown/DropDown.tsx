@@ -33,7 +33,7 @@ const DropDown: FC<IDropDownProps> = ({ button, children, keyValue }) => {
   }, [isDropDownOpen]);
 
   return (
-    <div key={keyValue} ref={wraperRef} onClick={handleOpen}>
+    <div key={keyValue} ref={wraperRef} onClick={handleOpen} className={styles.container}>
       <CSSTransition
         nodeRef={buttonRef}
         in={isChecked}

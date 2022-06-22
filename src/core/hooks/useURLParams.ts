@@ -3,7 +3,7 @@ import { paramsState } from '../store/reducers/paramsSlice';
 import { entryState } from '../store/reducers/entrySlice';
 import { useAppDispatch, useAppSelector } from './redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import getAllParams from './getAllParams';
+import getAllParams from '../utils/getAllParams';
 import optimizationParams from '../utils/optimizationParams';
 import scrollIntoViewRef from '../utils/scrollIntoViewRef';
 
