@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { IParams } from '../../models/IParams';
+import { IParams, ISearchParams } from '../../models/IParams';
 
 const initialState: IParams = {
   category: 0,
   sortBy: 'rating',
   order: true,
+  title: '',
+  description: '',
 };
 
 const paramsSlice = createSlice({
@@ -16,6 +18,8 @@ const paramsSlice = createSlice({
       state.category = action.payload.category;
       state.sortBy = action.payload.sortBy;
       state.order = action.payload.order;
+      state.title = action.payload.title;
+      state.description = action.payload.description;
     },
     setFilter(state, action: PayloadAction<number>) {
       state.category = action.payload;
@@ -25,6 +29,10 @@ const paramsSlice = createSlice({
     },
     setOrder(state, action: PayloadAction<boolean | null>) {
       state.order = action.payload ? action.payload : !state.order;
+    },
+    setSearch(state, action: PayloadAction<ISearchParams>) {
+      state.title = action.payload.title;
+      state.description = action.payload.description;
     },
   },
 });

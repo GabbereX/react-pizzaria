@@ -14,6 +14,8 @@ const useURLParams = (shopSelectionRef: RefObject<HTMLAnchorElement>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
+  console.log(params)
+
   const editURLParams = () => {
     const optimizedParams = optimizationParams(params);
     setSearchParams({ ...optimizedParams });

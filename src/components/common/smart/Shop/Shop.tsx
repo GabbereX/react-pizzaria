@@ -4,15 +4,16 @@ import Filter from '../Filter/Filter';
 import Sort from '../Sort/Sort';
 import GoodsList from '../../ordinary/GoodsList/GoodsList';
 import ErrorResponse from '../../simple/ErrorResponse/ErrorResponse';
-import { requestAPI } from '../../../../core/store/reducers/requestAPI';
 import useURLParams from '../../../../core/hooks/useURLParams';
 import Search from '../Search/Search';
+import useRequestAPI from '../../../../core/hooks/useRequestAPI';
 
 const Shop: FC = () => {
   const shopSelectionRef = useRef<HTMLAnchorElement>(null);
   const [params] = useURLParams(shopSelectionRef);
-  const { data, isFetching, error } = requestAPI.useGetPizzasQuery(params);
+  const { data, isFetching, error } = useRequestAPI(params);
 
+  // console.log(params)
   return (
     <section ref={shopSelectionRef} className={`${styles.section} container`}>
       <div className={`${styles.container}`}>

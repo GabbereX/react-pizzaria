@@ -1,14 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useAppSelector } from './redux';
+import { useAppSelector, useFieldsDispatch } from './redux';
 import { fieldsValuesState } from '../store/reducers/fieldsValuesSlice';
-import {
-  TStringIndexSignature,
-  useFieldsDispatch,
-} from './redux/useFieldsDispatch';
+import { IStringIndexSignature } from '../models/IStringIndexSignature';
 
 const useInput = (key: string, globalState: boolean) => {
   const globalValue = useAppSelector(fieldsValuesState);
-  const setGlobalValue: TStringIndexSignature = useFieldsDispatch();
+  const setGlobalValue: IStringIndexSignature = useFieldsDispatch();
   const [value, setValue] = useState<string>(globalValue[key] || '');
 
   useEffect(() => {

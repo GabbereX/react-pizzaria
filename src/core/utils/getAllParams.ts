@@ -9,6 +9,8 @@ const getAllParams = (searchParams: URLSearchParams) => {
 
   params.category = +params.category || 0;
   params.order = params.order === 'desc';
+  !params.description && (params.description = '')
+  !params.title && (params.title = '')
 
   return params;
 };
