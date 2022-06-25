@@ -1,10 +1,10 @@
 import { RefObject, useEffect } from 'react';
+import { TParamsState } from '../models/IParams';
 import { paramsState } from '../store/reducers/paramsSlice';
 import { entryState } from '../store/reducers/entrySlice';
 import { useAppDispatch, useAppSelector } from './redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import getAllParams from '../utils/getAllParams';
-import optimizationParams from '../utils/optimizationParams';
+import convertParams from '../utils/convertParams';
 import scrollIntoViewRef from '../utils/scrollIntoViewRef';
 
 const useURLParams = (shopSelectionRef: RefObject<HTMLAnchorElement>) => {
@@ -14,17 +14,10 @@ const useURLParams = (shopSelectionRef: RefObject<HTMLAnchorElement>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
-  console.log(params)
-
-  const editURLParams = () => {
-    const optimizedParams = optimizationParams(params);
-    setSearchParams({ ...optimizedParams });
-  };
-
   useEffect(() => {
     if (!entry && location.search) {
-      const URLParams = getAllParams(searchParams);
-      setParams(URLParams);
+      const StateParams = convertParams(searchParams) as TParamsState;
+      setParams(StateParams);
       scrollIntoViewRef(shopSelectionRef);
     }
     setEntry();
@@ -32,7 +25,8 @@ const useURLParams = (shopSelectionRef: RefObject<HTMLAnchorElement>) => {
 
   useEffect(() => {
     if (entry) {
-      editURLParams();
+      const URLParams = convertParams(params) as URLSearchParams;
+      setSearchParams({ ...URLParams });
       location.hash === '#check-pizza' && scrollIntoViewRef(shopSelectionRef);
     }
   }, [params, location.hash, location.search]);

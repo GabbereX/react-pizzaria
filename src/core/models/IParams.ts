@@ -1,18 +1,14 @@
-export interface IParams {
-  category?: number;
+export interface IParams<C, O> {
+  category?: C;
   sortBy?: string;
-  order?: boolean;
+  order?: O;
   title?: string;
   description?: string;
 }
 
-export interface IOptimizedParams {
-  category?: string;
-  sortBy?: string;
-  order?: string;
-  title?: string;
-  description?: string;
-}
+export type TParamsState = IParams<number, boolean>;
+export type TParamsURL = IParams<string, string>;
+export type TURLSearchParams = Record<string, string | number | boolean>;
 
 export interface ISearchParams {
   title: string;

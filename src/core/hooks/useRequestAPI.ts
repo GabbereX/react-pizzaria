@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { IPizza } from '../models/IPizza';
-import { IParams } from '../models/IParams';
+import {IParams, TParamsState} from '../models/IParams';
 
 interface IRequest {
   data?: IPizza[] | undefined;
@@ -13,7 +13,7 @@ interface IRequest {
   error?: FetchBaseQueryError | SerializedError | undefined;
 }
 
-const useRequestAPI = (params: IParams) => {
+const useRequestAPI = (params: TParamsState) => {
   // const [response, setResponse] = useState<IRequest>({
   //   isFetching: false,
   // });

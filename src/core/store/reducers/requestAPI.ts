@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { IPizza } from '../../models/IPizza';
 import { baseURL } from '../../config/api.config';
-import { IParams } from '../../models/IParams';
-import optimizationParams from '../../utils/optimizationParams';
+import { IPizza } from '../../models/IPizza';
+import { TParamsState} from '../../models/IParams';
+import convertParams from '../../utils/convertParams';
 
 export const requestAPI = createApi({
   reducerPath: 'requestAPI',
@@ -10,10 +10,10 @@ export const requestAPI = createApi({
     baseUrl: baseURL,
   }),
   endpoints: build => ({
-    getPizzas: build.query<IPizza[], IParams>({
+    getPizzas: build.query<IPizza[], TParamsState>({
       query: params => ({
         url: '/items',
-        params: optimizationParams(params),
+        params: convertParams(params),
       }),
     }),
   }),

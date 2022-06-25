@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { IParams, ISearchParams } from '../../models/IParams';
+import { ISearchParams, TParamsState } from '../../models/IParams';
 
-const initialState: IParams = {
+const initialState: TParamsState = {
   category: 0,
   sortBy: 'rating',
   order: true,
@@ -14,7 +14,7 @@ const paramsSlice = createSlice({
   name: 'paramsSlice',
   initialState,
   reducers: {
-    setParams(state, action: PayloadAction<IParams>) {
+    setParams(state, action: PayloadAction<TParamsState>) {
       state.category = action.payload.category;
       state.sortBy = action.payload.sortBy;
       state.order = action.payload.order;
