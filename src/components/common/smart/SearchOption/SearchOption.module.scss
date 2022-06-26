@@ -1,0 +1,30 @@
+.button {
+  padding: 8px 12px 6px 12px;
+  max-width: 294px;
+  min-width: 294px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.options {
+  position: relative;
+  &List {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--yellow);
+    border-radius: 5px;
+  }
+  &Item {
+    padding: 7px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    &:hover, &:active {
+      background: var(--yellow);
+    }
+  }
+}

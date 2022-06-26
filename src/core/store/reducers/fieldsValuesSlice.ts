@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 interface IInitialState {
-  [key: string]: string
+  [key: string]: string;
   search: string;
+  searchOption: string;
 }
 
 const initialState: IInitialState = {
   search: '',
+  searchOption: '0',
 };
 
 const fieldsValuesSlice = createSlice({
@@ -16,6 +18,9 @@ const fieldsValuesSlice = createSlice({
   reducers: {
     setSearchField(state, action: PayloadAction<string>) {
       state.search = action.payload;
+    },
+    setSearchOption(state, action: PayloadAction<string>) {
+      state.searchOption = action.payload;
     },
   },
 });

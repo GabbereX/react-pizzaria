@@ -15,6 +15,7 @@ const Sort: FC = () => {
       Сортировать по:
       <DropDown
         keyValue={'sortDropDown'}
+        zIndex={11}
         button={
           <button className={styles.sortChecked}>
             {sortList[sortParams.sortCkechedId].text}

@@ -6,9 +6,10 @@ interface IDropDownProps {
   button: ReactNode;
   children: ReactNode;
   keyValue: string;
+  zIndex: number
 }
 
-const DropDown: FC<IDropDownProps> = ({ button, children, keyValue }) => {
+const DropDown: FC<IDropDownProps> = ({ button, children, keyValue, zIndex }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -33,7 +34,7 @@ const DropDown: FC<IDropDownProps> = ({ button, children, keyValue }) => {
   }, [isDropDownOpen]);
 
   return (
-    <div key={keyValue} ref={wraperRef} onClick={handleOpen} className={styles.container}>
+    <div key={keyValue} ref={wraperRef} onClick={handleOpen} style={{zIndex}}>
       <CSSTransition
         nodeRef={buttonRef}
         in={isChecked}
