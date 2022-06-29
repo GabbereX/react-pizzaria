@@ -2,6 +2,8 @@ export interface IParams<C, O> {
   category?: C;
   sortBy?: string;
   order?: O;
+  searchValue?: string;
+  searchOption?: string;
 }
 
 export type TParamsState = IParams<number, boolean>;

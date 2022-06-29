@@ -1,6 +1,7 @@
 .goodsItem {
   border: 1px solid var(--yellow);
   border-radius: 10px;
+  animation: visible 0.4s ease;
   &Image {
     padding: 0 5px;
   }
@@ -42,5 +43,14 @@
   }
   &Order {
     padding: 8px 23px 7px 23px;
+  }
+}
+
+@keyframes visible {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

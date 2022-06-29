@@ -1,5 +1,5 @@
-import React, { FC, memo, RefObject } from 'react';
-import GoodsList from '../../ordinary/GoodsList/GoodsList';
+import React, { FC, RefObject } from 'react';
+import GoodsList from '../../smart/GoodsList/GoodsList';
 import ErrorResponse from '../../simple/ErrorResponse/ErrorResponse';
 import useRequestAPI from '../../../../core/hooks/useRequestAPI';
 
@@ -9,7 +9,6 @@ interface IProps {
 
 const Goods: FC<IProps> = ({ shopSelectionRef }) => {
   const { data, isFetching, error } = useRequestAPI(shopSelectionRef);
-
 
   return (
     <>
@@ -22,4 +21,4 @@ const Goods: FC<IProps> = ({ shopSelectionRef }) => {
   );
 };
 
-export default memo(Goods);
+export default Goods;

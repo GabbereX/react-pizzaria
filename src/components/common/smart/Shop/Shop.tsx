@@ -3,7 +3,7 @@ import styles from './Shop.module.scss';
 import Filter from '../Filter/Filter';
 import Sort from '../Sort/Sort';
 import Search from '../Search/Search';
-import Goods from '../Goods/Goods';
+import Goods from '../../ordinary/Goods/Goods';
 
 const Shop: FC = () => {
   const shopSelectionRef = useRef<HTMLAnchorElement>(null);

@@ -1,17 +1,22 @@
 import { RefObject, useEffect } from 'react';
-import { TParamsState } from '../models/IParams';
+import { TParamsState, TParamsURL } from '../models/IParams';
 import { paramsState } from '../store/reducers/paramsSlice';
 import { entryState } from '../store/reducers/entrySlice';
 import { useAppDispatch, useAppSelector } from './redux';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import {
+  URLSearchParamsInit,
+  useLocation,
+  useSearchParams,
+} from 'react-router-dom';
+import { fieldsValuesState } from '../store/reducers/fieldsValuesSlice';
 import convertParams from '../utils/convertParams';
 import scrollIntoViewRef from '../utils/scrollIntoViewRef';
-import { fieldsValuesState } from '../store/reducers/fieldsValuesSlice';
 
 const useURLParams = (shopSelectionRef: RefObject<HTMLAnchorElement>) => {
   const entry = useAppSelector(entryState);
   const params = useAppSelector(paramsState);
-  const { search: searchValue, searchOption } = useAppSelector(fieldsValuesState);
+  const { search: searchValue, searchOption } =
+    useAppSelector(fieldsValuesState);
   const { setParams, setEntry, setSearchField, setSearchOption } =
     useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,14 +41,16 @@ const useURLParams = (shopSelectionRef: RefObject<HTMLAnchorElement>) => {
   // set params to URL
   useEffect(() => {
     if (entry) {
-      const URLParams: any = {
-        ...convertParams(params) as URLSearchParams
-      }
-      searchValue && (URLParams.searchValue = searchValue)
-      searchOption !== '0' && (URLParams.searchOption = searchOption)
+      const URLParams: URLSearchParamsInit = {
+        ...(convertParams(params) as TParamsURL),
+      };
+      searchValue && (URLParams['searchValue'] = searchValue);
+      searchOption !== '0' && (URLParams['searchOption'] = searchOption);
 
       setSearchParams(URLParams);
       location.hash === '#check-pizza' && scrollIntoViewRef(shopSelectionRef);
+      location.search === '?sortBy=rating&order=desc' &&
+        window.history.replaceState(null, 'search', window.location.pathname);
     }
   }, [params, searchValue, searchOption, location.hash, location.search]);
 

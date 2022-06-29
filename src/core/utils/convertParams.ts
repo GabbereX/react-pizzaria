@@ -21,7 +21,7 @@ function convertForURL(params: TParamsState) {
   return convertedParams;
 }
 
-function convertForState(params: URLSearchParams) {
+export function convertForState(params: URLSearchParams) {
   const convertedParams: TURLSearchParams = {};
 
   for (const [key, value] of params.entries()) {
