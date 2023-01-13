@@ -1,53 +1,69 @@
-import React, { FC, useEffect, useState } from 'react';
-import styles from './GoodsList.module.scss';
-import { IPizza } from '../../../../core/models/IPizza';
-import { useAppSelector } from '../../../../core/hooks/redux';
-import { fieldsValuesState } from '../../../../core/store/reducers/fieldsValuesSlice';
-import Skeleton from '../../ui/Skeleton/Skeleton';
-import GoodsItem from '../../ordinary/GoodsItem/GoodsItem';
-import EmptyGoodsList from '../../simple/EmptyGoodsList/EmptyGoodsList';
+import React, { FC, useEffect, useState } from 'react'
+import styles from './GoodsList.module.scss'
+import { IPizza } from '../../../../core/models/IPizza'
+import { useAppDispatch, useAppSelector } from '../../../../core/hooks/redux'
+import { fieldsValuesState } from '../../../../core/store/reducers/fieldsValuesSlice'
+import Skeleton from '../../ui/Skeleton/Skeleton'
+import GoodsItem from '../../ordinary/GoodsItem/GoodsItem'
+import EmptyGoodsList from '../../simple/EmptyGoodsList/EmptyGoodsList'
+import { paramsState } from '../../../../core/store/reducers/paramsSlice'
+import { itemsPerPage } from '../../../../core/constants/navigationList'
 
 interface IData {
-  data: IPizza[] | undefined;
-  isFetching: boolean;
+  data?: IPizza[]
+  isFetching: boolean
 }
 
 const GoodsList: FC<IData> = ({ data, isFetching }) => {
-  const [filteredData, setFilteredData] = useState<IPizza[] | null>(null);
+  const [processedData, setProcessedData] = useState<IPizza[] | null>(null)
   const { search: searchValue, searchOption } =
-    useAppSelector(fieldsValuesState);
+    useAppSelector(fieldsValuesState)
+  const { setDataLength } = useAppDispatch()
+  const { page } = useAppSelector(paramsState)
 
   useEffect(() => {
     if (data) {
       const filterData = data.filter(item => {
         const value = `${searchOption !== '2' && item.title} ${
           searchOption !== '1' && item.description
-        }`;
-        return value.toLowerCase().includes(searchValue.toLowerCase());
-      });
-      setFilteredData(filterData);
+        }`
+        return value.toLowerCase().includes(searchValue.toLowerCase())
+      })
+
+      setDataLength(filterData.length)
+
+      const dataSliceEnd = Number(page) * itemsPerPage
+      const dataSliceStart = dataSliceEnd - itemsPerPage
+      const dataSlice = filterData.slice(dataSliceStart, dataSliceEnd)
+
+      setProcessedData(dataSlice)
     }
-  }, [data, searchValue, searchOption]);
+  }, [data, searchValue, searchOption, page])
 
   return (
     <>
-      {filteredData?.length ? (
+      {processedData?.length ? (
         <ul className={styles.goodsList}>
           {isFetching ? (
             <Skeleton />
           ) : (
-            filteredData.map(item => <GoodsItem key={item.id} data={item} />)
+            processedData.map(item => (
+              <GoodsItem
+                key={item.id}
+                data={item}
+              />
+            ))
           )}
         </ul>
-      ) : isFetching && !filteredData ? (
+      ) : isFetching && !processedData ? (
         <ul className={styles.goodsList}>
           <Skeleton />
         </ul>
       ) : (
-        filteredData?.length === 0 && <EmptyGoodsList />
+        processedData?.length === 0 && <EmptyGoodsList />
       )}
     </>
-  );
-};
+  )
+}
 
-export default GoodsList;
+export default GoodsList

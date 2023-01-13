@@ -1,37 +1,44 @@
-import { TParamsState, TParamsURL, TURLSearchParams } from '../models/IParams';
+import { TParamsState, TParamsURL, TURLSearchParams } from '../models/IParams'
 
-const convertParams = (params: TParamsState | URLSearchParams) => {
+const convertParams = (
+  params: TParamsState | URLSearchParams,
+  withPage: boolean = true
+) => {
   if (params instanceof URLSearchParams) {
-    return convertForState(params);
+    return convertForState(params)
   } else {
-    return convertForURL(params);
+    const optimizedParams = { ...params }
+    !withPage && delete optimizedParams.page
+    return convertForURL(optimizedParams)
   }
-};
+}
 
 function convertForURL(params: TParamsState) {
-  const { sortBy, order, category } = params;
+  const { sortBy, order, category, page } = params
 
   const convertedParams: TParamsURL = {
     sortBy,
-    order: order ? 'desc' : 'asc',
-  };
+    order: order ? 'desc' : 'asc'
+  }
 
-  category !== 0 && (convertedParams.category = String(category));
+  page && (convertedParams.page = String(page))
+  category !== 0 && (convertedParams.category = String(category))
 
-  return convertedParams;
+  return convertedParams
 }
 
 export function convertForState(params: URLSearchParams) {
-  const convertedParams: TURLSearchParams = {};
+  const convertedParams: TURLSearchParams = {}
 
   for (const [key, value] of params.entries()) {
-    convertedParams[key] = value;
+    convertedParams[key] = value
   }
 
-  convertedParams.category = +convertedParams.category || 0;
-  convertedParams.order = convertedParams.order === 'desc';
+  convertedParams.category = +convertedParams.category || 0
+  convertedParams.order = convertedParams.order === 'desc'
+  convertedParams.page = +convertedParams.page || 1
 
-  return convertedParams;
+  return convertedParams
 }
 
-export default convertParams;
+export default convertParams

@@ -1,6 +1,6 @@
 interface ILinks {
-  path: string;
-  text: string;
+  path: string
+  text: string
 }
 
 export const linksList: ILinks[] = [
@@ -9,5 +9,7 @@ export const linksList: ILinks[] = [
   { path: '/#check-pizza', text: 'Выбрать пиццу' },
   { path: '/payment', text: 'Оплата' },
   { path: '/delivery', text: 'Доставка' },
-  { path: '/contacts', text: 'Контакты' },
-];
+  { path: '/contacts', text: 'Контакты' }
+]
+
+export const itemsPerPage = 12
