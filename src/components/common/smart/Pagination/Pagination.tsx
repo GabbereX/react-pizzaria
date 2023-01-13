@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import {
   itemsPerPage
 } from '../../../../core/constants/navigationList'
@@ -11,10 +11,6 @@ const Pagination: FC = () => {
   const { page } = useAppSelector(paramsState)
   const { dataLength } = useAppSelector(utilsState)
   const { setPage } = useAppDispatch()
-
-  useEffect(() => {
-    console.log(dataLength)
-  }, [dataLength])
 
   return (
     <>
