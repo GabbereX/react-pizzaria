@@ -10,7 +10,7 @@ interface IModalProps {
   title?: string
   footerChildren?: ReactNode
   isModalClose?: boolean
-  setIsModalClose?: (isModalClose: boolean) => void
+  setIsModalClose?: (isModalClose: boolean) => void,
 }
 
 const Modal: FC<IModalProps> = ({
@@ -23,7 +23,8 @@ const Modal: FC<IModalProps> = ({
   isModalClose = false,
   setIsModalClose
 }) => {
-  const [ scrollWidth ] = useState(window.innerWidth - document.body.offsetWidth + 'px')
+  const [ scrollWidth ] =
+    useState<string>(window.innerWidth - document.body.offsetWidth + 'px')
 
   const footer = document.getElementById('footer')
 
@@ -52,7 +53,6 @@ const Modal: FC<IModalProps> = ({
       maxWidth={ maxWidth }
       onOpen={ handleOpen }
       onClose={ handleClose }
-      scrollWidth={ scrollWidth }
       isModalClose={ isModalClose }
     >
       {

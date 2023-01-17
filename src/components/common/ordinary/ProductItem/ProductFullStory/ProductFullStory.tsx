@@ -1,8 +1,11 @@
 import { FC, ReactNode, useEffect, useState } from 'react'
-import styles from './ProductFullStory.module.scss'
-import { IPizza } from '../../../../../core/models/IPizza'
+
 import { useAppDispatch } from '../../../../../core/hooks/redux'
+
+import { IPizza } from '../../../../../core/models/IPizza'
 import { IProduct } from '../../../../../core/models/IOrder'
+
+import styles from './ProductFullStory.module.scss'
 
 interface IProps {
   data: IPizza
@@ -88,7 +91,7 @@ const ProductFullStory: FC<IProps> = ({ data }) => {
         className={ styles.image }
       />
 
-      <div className={ styles.delimiter }/>
+      <div className={ styles.delimiter } />
 
       <div className={ styles.description_container }>
         <p className={ styles.description }>
@@ -97,7 +100,7 @@ const ProductFullStory: FC<IProps> = ({ data }) => {
 
         <div className={ styles.options }>
           <span>Размер:</span>
-          <div className="d-flex">
+          <div className='d-flex'>
             {
               sizes.map((size, index) =>
                 renderCheckedButton({ content: size, index }))
@@ -107,7 +110,7 @@ const ProductFullStory: FC<IProps> = ({ data }) => {
 
         <div className={ styles.options }>
           <span>Тесто:</span>
-          <div className="d-flex">
+          <div className='d-flex'>
             {
               types.map((type, index) =>
                 renderCheckedButton({ isSize: false, content: type, index }))
@@ -117,7 +120,7 @@ const ProductFullStory: FC<IProps> = ({ data }) => {
 
         <div className={ styles.options }>
           <span>Количество:</span>
-          <div className="d-flex">
+          <div className='d-flex'>
             <button
               className={ `${ styles.count } light-gray-button` }
               onClick={ () => setCount(count > 1 ? (count - 1) : 1) }

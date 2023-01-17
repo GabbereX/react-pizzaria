@@ -1,14 +1,15 @@
 import { FC, ReactNode, useState } from 'react'
-
-import { IPizza } from '../../../../../core/models/IPizza'
+import CountUp from 'react-countup'
 
 import Modal from '../../../ui/Modal/Modal'
 import ProductFullStory from '../ProductFullStory/ProductFullStory'
 
-import styles from './ProductShortStory.module.scss'
 import { useAppDispatch, useAppSelector } from '../../../../../core/hooks/redux'
 import { orderState } from '../../../../../core/store/reducers/orderSlice'
-import CountUp from 'react-countup'
+
+import { IPizza } from '../../../../../core/models/IPizza'
+
+import styles from './ProductShortStory.module.scss'
 
 interface IData {
   data: IPizza
@@ -49,11 +50,13 @@ const ProductShortStory: FC<IData> = ({ data }) => {
         <span>&#160;₽</span>
 
       </div>
-      <button className="orange-button" onClick={addProductToCart}>
+      <button
+        className='orange-button'
+        onClick={ addProductToCart }>
         Добавить в корзину
       </button>
       <button
-        className="light-gray-button"
+        className='light-gray-button'
         onClick={ () => setIsModalClose(true) }
       >
         Отмена
@@ -83,7 +86,7 @@ const ProductShortStory: FC<IData> = ({ data }) => {
             isModalClose={ isModalClose }
             setIsModalClose={ setIsModalClose }
           >
-            <ProductFullStory data={ data }/>
+            <ProductFullStory data={ data } />
           </Modal>
         </div>
       </div>

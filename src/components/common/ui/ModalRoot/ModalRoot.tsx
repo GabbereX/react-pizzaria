@@ -12,7 +12,6 @@ interface IModalRootProps {
   maxWidth?: number
   onOpen?: () => void
   onClose?: () => void
-  scrollWidth?: string
   isModalClose?: boolean
 }
 
@@ -23,13 +22,14 @@ const ModalRoot: FC<IModalRootProps> = ({
   maxWidth = 500,
   onOpen,
   onClose,
-  scrollWidth = window.innerWidth - document.body.offsetWidth + 'px',
   isModalClose = false
 }) => {
   const modalWrapperRef = useRef<HTMLDivElement>(null)
   const closeModalButtonRef = useRef<HTMLButtonElement>(null)
 
   const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
+  const [ scrollWidth, setScrollWidth ] =
+    useState<string>(window.innerWidth - document.body.offsetWidth + 'px')
 
   const handleOpen = (): void => {
     setIsModalOpen(true)
@@ -66,6 +66,10 @@ const ModalRoot: FC<IModalRootProps> = ({
   useEffect(() => {
     isModalClose && handleClose()
   }, [ isModalClose ])
+
+  useEffect(() => {
+    setScrollWidth(window.innerWidth - document.body.offsetWidth + 'px')
+  }, [])
 
   return (
     <div id={ id }>
