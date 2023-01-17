@@ -10,6 +10,7 @@ import { orderState } from '../../../../../core/store/reducers/orderSlice'
 import { IPizza } from '../../../../../core/models/IPizza'
 
 import styles from './ProductShortStory.module.scss'
+import ModalFooter from '../../../simple/ModalFooter/ModalFooter'
 
 interface IData {
   data: IPizza
@@ -24,7 +25,7 @@ const ProductShortStory: FC<IData> = ({ data }) => {
 
   const [ isModalClose, setIsModalClose ] = useState<boolean>(false)
 
-  const addProductToCart = () => {
+  const addProductToCart = (): void => {
     currentProduct && pushCheckedProduct(currentProduct)
     setIsModalClose(true)
   }
@@ -38,30 +39,19 @@ const ProductShortStory: FC<IData> = ({ data }) => {
   )
 
   const renderFooterModal = (newPrice: number): ReactNode =>
-    <div className={ styles.footer_content }>
-      <div className={ styles.final_price }>
-        Стоимость:&#160;
-        <CountUp
-          start={ oldPrice || price }
-          end={ newPrice }
-          duration={ 0.3 }
-          onUpdate={ () => (oldPrice = newPrice) }
-        />
-        <span>&#160;₽</span>
-
-      </div>
-      <button
-        className='orange-button'
-        onClick={ addProductToCart }>
-        Добавить в корзину
-      </button>
-      <button
-        className='light-gray-button'
-        onClick={ () => setIsModalClose(true) }
-      >
-        Отмена
-      </button>
-    </div>
+    <ModalFooter
+      resolveAction={ addProductToCart }
+      cancelAction={ setIsModalClose }
+    >
+      Стоимость:&#160;
+      <CountUp
+        start={ oldPrice || price }
+        end={ newPrice }
+        duration={ 0.3 }
+        onUpdate={ () => (oldPrice = newPrice) }
+      />
+      <span>&#160;₽</span>
+    </ModalFooter>
 
   return (
     <li className={ styles.container }>

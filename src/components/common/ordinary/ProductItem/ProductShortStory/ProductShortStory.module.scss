@@ -43,32 +43,6 @@
   align-items: center;
 }
 
-.final_price {
-  padding-top: 4px;
-  width: 210px;
-  font-size: 18px;
-  font-weight: 600;
-
-  & > span {
-    font-weight: 700;
-    color: var(--orange);
-  }
-}
-
-.footer_content {
-  display: flex;
-  align-items: center;
-
-  & > button {
-    padding: 11px 10px 9px;
-    border-radius: 7px;
-
-    &:not(:last-child) {
-      margin-right: 15px;
-    }
-  }
-}
-
 .cost {
   color: var(--black);
   font-size: 22px;

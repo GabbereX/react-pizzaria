@@ -4,7 +4,7 @@ import { RootState } from '../store'
 import { checkForDoubles } from '../../utils/orderUtils'
 
 export const initialState: IOrder = {
-  checkedProducts: [],
+  checkedProducts: JSON.parse(localStorage.getItem('pizzaria_products') ?? '') || [],
   currentProduct: null
 }
 
@@ -15,6 +15,7 @@ const orderSlice = createSlice({
     setCurrentProduct(state, action: PayloadAction<IProduct | null>) {
       state.currentProduct = action.payload
     },
+
     pushCheckedProduct(state, action: PayloadAction<IProduct>) {
       const isDouble = checkForDoubles(action.payload)
       const doubleProduct = state.checkedProducts.find(isDouble)
@@ -32,6 +33,23 @@ const orderSlice = createSlice({
             : product
         })
       } else state.checkedProducts.push(action.payload)
+    },
+
+    deleteCheckedProduct(state, action: PayloadAction<IProduct>) {
+      const isDouble = checkForDoubles(action.payload)
+
+      state.checkedProducts = state.checkedProducts.filter(product =>
+        !isDouble(product))
+    },
+
+    editCheckedProduct(state, action: PayloadAction<IProduct>) {
+      const isDouble = checkForDoubles(action.payload)
+
+      state.checkedProducts = state.checkedProducts.map(product => {
+        return isDouble(product)
+          ? action.payload
+          : product
+      })
     }
   }
 })

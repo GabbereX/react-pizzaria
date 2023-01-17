@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react'
 import ModalRoot from '../ModalRoot/ModalRoot'
 import styles from './Modal.module.scss'
+import { getScrollWidth } from '../../../../core/utils/scrollWidth'
 
 interface IModalProps {
   id: string
@@ -23,10 +24,11 @@ const Modal: FC<IModalProps> = ({
   isModalClose = false,
   setIsModalClose
 }) => {
-  const [ scrollWidth ] =
-    useState<string>(window.innerWidth - document.body.offsetWidth + 'px')
+  const [ scrollWidth ] = useState<string>(getScrollWidth())
 
   const footer = document.getElementById('footer')
+  const footerPadding =
+    `${ title ? '15px' : '0' } 15px ${ footerChildren ? '15px' : '0' }`
 
   const handleOpen = (): void => {
     if (footer) {
@@ -64,10 +66,12 @@ const Modal: FC<IModalProps> = ({
 
       <div
         className={ styles.content_wrapper }
-        style={ { padding: `${ title ? '15px' : '0' } 15px ${ footer ? '15px' : '0' }` } }
-      >{ children }</div>
+        style={ { padding: footerPadding } }
+      >
+        { children }
+      </div>
 
-      { footer &&
+      { footerChildren &&
         <div className={ styles.footer_wrapper }>
           <div className={ styles.footer_container }>
             { footerChildren }

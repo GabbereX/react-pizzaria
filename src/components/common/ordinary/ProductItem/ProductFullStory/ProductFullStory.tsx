@@ -6,6 +6,7 @@ import { IPizza } from '../../../../../core/models/IPizza'
 import { IProduct } from '../../../../../core/models/IOrder'
 
 import styles from './ProductFullStory.module.scss'
+import CountProduct from '../../CountProduct/CountProduct'
 
 interface IProps {
   data: IPizza
@@ -120,23 +121,10 @@ const ProductFullStory: FC<IProps> = ({ data }) => {
 
         <div className={ styles.options }>
           <span>Количество:</span>
-          <div className='d-flex'>
-            <button
-              className={ `${ styles.count } light-gray-button` }
-              onClick={ () => setCount(count > 1 ? (count - 1) : 1) }
-            >
-              -
-            </button>
-            <span>
-              { count }
-            </span>
-            <button
-              className={ `${ styles.count } light-gray-button` }
-              onClick={ () => setCount(count + 1) }
-            >
-              +
-            </button>
-          </div>
+          <CountProduct
+            count={ count }
+            setCount={ setCount }
+          />
         </div>
       </div>
     </div>

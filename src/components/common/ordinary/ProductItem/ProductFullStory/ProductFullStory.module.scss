@@ -54,28 +54,3 @@
   right: 0;
   bottom: 0
 }
-
-.count {
-  border-radius: 50%;
-  min-width: 28px;
-  max-width: 22px;
-
-  font-size: 18px;
-  font-weight: 400;
-
-  &:first-child {
-    padding-bottom: 3px;
-  }
-
-  &:last-child {
-    padding-top: 5px;
-  }
-
-  & + span {
-    margin: auto;
-    padding-top: 4px;
-    width: 30px;
-    font-size: 18px;
-    text-align: center;
-  }
-}

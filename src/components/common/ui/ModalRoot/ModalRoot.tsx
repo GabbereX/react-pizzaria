@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 import CloseIcon from '../icons/CloseIcon/CloseIcon'
 
 import styles from './Modal.module.scss'
+import { getScrollWidth } from '../../../../core/utils/scrollWidth'
 
 interface IModalRootProps {
   id: string
@@ -14,6 +15,8 @@ interface IModalRootProps {
   onClose?: () => void
   isModalClose?: boolean
 }
+
+let scrollWidth: string = getScrollWidth()
 
 const ModalRoot: FC<IModalRootProps> = ({
   id,
@@ -28,8 +31,6 @@ const ModalRoot: FC<IModalRootProps> = ({
   const closeModalButtonRef = useRef<HTMLButtonElement>(null)
 
   const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
-  const [ scrollWidth, setScrollWidth ] =
-    useState<string>(window.innerWidth - document.body.offsetWidth + 'px')
 
   const handleOpen = (): void => {
     setIsModalOpen(true)
@@ -68,7 +69,7 @@ const ModalRoot: FC<IModalRootProps> = ({
   }, [ isModalClose ])
 
   useEffect(() => {
-    setScrollWidth(window.innerWidth - document.body.offsetWidth + 'px')
+    scrollWidth = getScrollWidth()
   }, [])
 
   return (

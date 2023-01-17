@@ -1,9 +1,7 @@
 import React, { FC } from 'react'
-
-import Modal from '../../ui/Modal/Modal'
 import NavigationContainer from '../../../containers/NavigationContainer/NavigationContainer'
 import Authorization from '../../simple/Authorization/Authorization'
-import Basket from '../../simple/Basket/Basket'
+import Basket from '../../smart/Basket/Basket'
 import CallRequest from '../../simple/CallRequest/CallRequest'
 import Info from '../../simple/Info/Info'
 import Logo from '../../simple/Logo/Logo'
@@ -24,15 +22,7 @@ const Header: FC = () => {
         <div className={ styles.headerBottom }>
           <NavigationContainer />
           <Authorization />
-          <Modal
-            id='cart-modal'
-            button={ <Basket /> }
-            title='Корзина'
-            maxWidth={ 630 }
-          >
-            Корзина
-          </Modal>
-
+          <Basket />
         </div>
       </div>
     </header>
