@@ -6,12 +6,14 @@ import fieldsValuesSlice, {
   fieldsValuesAction
 } from './reducers/fieldsValuesSlice'
 import utilsSlice, { utilsAction } from './reducers/utilsSlice'
+import orderSlice, { orderActions } from './reducers/orderSlice'
 
 export const actionsRoot = {
   ...paramsActions,
   ...entryAction,
   ...fieldsValuesAction,
-  ...utilsAction
+  ...utilsAction,
+  ...orderActions
 }
 
 export const reducers = {
@@ -19,7 +21,8 @@ export const reducers = {
   paramsSlice,
   entrySlice,
   fieldsValuesSlice,
-  utilsSlice
+  utilsSlice,
+  orderSlice
 }
 
 const rootReducer = combineReducers(reducers)

@@ -4,5 +4,5 @@ export const REFRESH_PAGE = 'Обновите страницу или зайди
 // Page Not Found
 export const PAGE_NOT_FOUND = 'Такой страницы не существует.';
 export const GO_TO_MAIN = 'Перейти на главную';
-// Goods List Empty
+// Product List Empty
 export const GOODS_LIST_EMPTY = 'По данному запросу ничего не найдено'

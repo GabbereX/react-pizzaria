@@ -1,0 +1,94 @@
+import { FC, ReactNode, useState } from 'react'
+
+import { IPizza } from '../../../../../core/models/IPizza'
+
+import Modal from '../../../ui/Modal/Modal'
+import ProductFullStory from '../ProductFullStory/ProductFullStory'
+
+import styles from './ProductShortStory.module.scss'
+import { useAppDispatch, useAppSelector } from '../../../../../core/hooks/redux'
+import { orderState } from '../../../../../core/store/reducers/orderSlice'
+import CountUp from 'react-countup'
+
+interface IData {
+  data: IPizza
+}
+
+let oldPrice: number | null = null
+
+const ProductShortStory: FC<IData> = ({ data }) => {
+  const { imageUrl, title, description, price, id } = data
+  const { currentProduct } = useAppSelector(orderState)
+  const { pushCheckedProduct } = useAppDispatch()
+
+  const [ isModalClose, setIsModalClose ] = useState<boolean>(false)
+
+  const addProductToCart = () => {
+    currentProduct && pushCheckedProduct(currentProduct)
+    setIsModalClose(true)
+  }
+
+  const renderOpenModalButton = (): ReactNode => (
+    <button
+      className={ `${ styles.order } orange-button` }
+    >
+      Заказать
+    </button>
+  )
+
+  const renderFooterModal = (newPrice: number): ReactNode =>
+    <div className={ styles.footer_content }>
+      <div className={ styles.final_price }>
+        Стоимость:&#160;
+        <CountUp
+          start={ oldPrice || price }
+          end={ newPrice }
+          duration={ 0.3 }
+          onUpdate={ () => (oldPrice = newPrice) }
+        />
+        <span>&#160;₽</span>
+
+      </div>
+      <button className="orange-button" onClick={addProductToCart}>
+        Добавить в корзину
+      </button>
+      <button
+        className="light-gray-button"
+        onClick={ () => setIsModalClose(true) }
+      >
+        Отмена
+      </button>
+    </div>
+
+  return (
+    <li className={ styles.container }>
+      <img
+        src={ imageUrl }
+        alt={ title }
+        className={ styles.image }
+      />
+      <div className={ styles.info }>
+        <h3 className={ styles.title }>{ title }</h3>
+        <p className={ styles.description }>{ description }</p>
+        <div className={ styles.price }>
+          <div className={ styles.cost }>от { price } ₽</div>
+          <Modal
+            id={ `goods-item-${ id }` }
+            button={ renderOpenModalButton() }
+            title={ title }
+            maxWidth={ 920 }
+            footerChildren={
+              renderFooterModal(currentProduct?.price || price)
+            }
+            isModalClose={ isModalClose }
+            setIsModalClose={ setIsModalClose }
+          >
+            <ProductFullStory data={ data }/>
+          </Modal>
+        </div>
+      </div>
+    </li>
+  )
+}
+
+export default ProductShortStory

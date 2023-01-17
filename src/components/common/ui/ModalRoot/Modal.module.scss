@@ -35,7 +35,7 @@
     position: relative;
     left: 50%;
     top: 50%;
-    padding: 30px;
+    padding: 15px 0;
     background: #fff;
     transform: translate(-50%, -50%);
     border-radius: 10px;
@@ -44,9 +44,14 @@
 
   &_close {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 15px;
+    top: 15px;
+    padding: 0;
+    line-height: 0;
     background: none;
     border: none;
+    & svg {
+      width: 18px;
+    }
   }
 }

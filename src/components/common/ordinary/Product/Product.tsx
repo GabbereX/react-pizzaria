@@ -1,5 +1,5 @@
 import React, { FC, RefObject } from 'react'
-import GoodsList from '../../smart/GoodsList/GoodsList'
+import ProductList from '../../smart/ProductList/ProductList'
 import ErrorResponse from '../../simple/ErrorResponse/ErrorResponse'
 import useRequestAPI from '../../../../core/hooks/useRequestAPI'
 
@@ -7,13 +7,13 @@ interface IProps {
   shopSelectionRef: RefObject<HTMLAnchorElement>
 }
 
-const Goods: FC<IProps> = ({ shopSelectionRef }) => {
+const Product: FC<IProps> = ({ shopSelectionRef }) => {
   const { data, isFetching, error } = useRequestAPI(shopSelectionRef)
 
   return (
     <>
       {!error ? (
-        <GoodsList
+        <ProductList
           data={data}
           isFetching={isFetching}
         />
@@ -24,4 +24,4 @@ const Goods: FC<IProps> = ({ shopSelectionRef }) => {
   )
 }
 
-export default Goods
+export default Product

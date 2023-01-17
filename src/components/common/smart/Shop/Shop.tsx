@@ -3,7 +3,7 @@ import styles from './Shop.module.scss'
 import Filter from '../Filter/Filter'
 import Sort from '../Sort/Sort'
 import Search from '../Search/Search'
-import Goods from '../../ordinary/Goods/Goods'
+import Product from '../../ordinary/Product/Product'
 import Pagination from '../Pagination/Pagination'
 
 const Shop: FC = () => {
@@ -20,7 +20,7 @@ const Shop: FC = () => {
           <Sort />
         </div>
         <Search />
-        <Goods shopSelectionRef={shopSelectionRef} />
+        <Product shopSelectionRef={shopSelectionRef} />
         <Pagination />
       </div>
     </section>

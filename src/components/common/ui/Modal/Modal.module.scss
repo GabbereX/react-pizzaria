@@ -1,0 +1,48 @@
+.title {
+  display: -webkit-box;
+  padding: 0 35px 12px 35px;
+
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 25px;
+  text-align: center;
+
+  overflow: hidden;
+
+  &_wrapper {
+    border-bottom: 1px solid var(--light-gray);
+  }
+}
+
+.content {
+  &_wrapper {
+    max-height: calc(100vh - 100px);
+    overflow: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--orange) transparent;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--orange);
+    }
+  }
+}
+
+.footer {
+  &_wrapper {
+    border-top: 1px solid var(--light-gray);
+  }
+
+  &_container {
+    display: flex;
+    justify-content: right;
+    margin-left: auto;
+    padding: 15px 15px 0;
+  }
+}

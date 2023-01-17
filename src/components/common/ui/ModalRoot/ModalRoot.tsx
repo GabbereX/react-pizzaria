@@ -5,7 +5,7 @@ import CloseIcon from '../icons/CloseIcon/CloseIcon'
 
 import styles from './Modal.module.scss'
 
-export interface IModalProps {
+interface IModalRootProps {
   id: string
   button: ReactNode
   children: ReactNode
@@ -13,21 +13,23 @@ export interface IModalProps {
   onOpen?: () => void
   onClose?: () => void
   scrollWidth?: string
+  isModalClose?: boolean
 }
 
-const ModalRoot: FC<IModalProps> = ({
+const ModalRoot: FC<IModalRootProps> = ({
   id,
   button,
   children,
   maxWidth = 500,
   onOpen,
   onClose,
-  scrollWidth = window.innerWidth - document.body.offsetWidth + 'px'
+  scrollWidth = window.innerWidth - document.body.offsetWidth + 'px',
+  isModalClose = false
 }) => {
   const modalWrapperRef = useRef<HTMLDivElement>(null)
   const closeModalButtonRef = useRef<HTMLButtonElement>(null)
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
 
   const handleOpen = (): void => {
     setIsModalOpen(true)
@@ -45,7 +47,7 @@ const ModalRoot: FC<IModalProps> = ({
     document.body.style.overflowY = ''
 
     modalWrapperRef.current &&
-      (modalWrapperRef.current.style.paddingLeft = scrollWidth)
+    (modalWrapperRef.current.style.paddingLeft = scrollWidth)
 
     onClose?.()
   }
@@ -61,32 +63,40 @@ const ModalRoot: FC<IModalProps> = ({
     }
   }, [])
 
+  useEffect(() => {
+    isModalClose && handleClose()
+  }, [ isModalClose ])
+
   return (
-    <div id={id}>
-      <div onClick={handleOpen}>{button}</div>
+    <div id={ id }>
+      <div onClick={ handleOpen }>{ button }</div>
 
       <CSSTransition
-        nodeRef={modalWrapperRef}
-        in={isModalOpen}
-        timeout={300}
-        classNames={{
+        nodeRef={ modalWrapperRef }
+        in={ isModalOpen }
+        timeout={ 300 }
+        classNames={ {
           enter: styles.modal_enter,
           enterActive: styles.modal_enter_active,
           exit: styles.modal_exit,
           exitActive: styles.modal_exit_active
-        }}
-        unmountOnExit>
+        } }
+        unmountOnExit
+      >
         <div
-          ref={modalWrapperRef}
-          className={styles.modal_wrapper}>
+          ref={ modalWrapperRef }
+          className={ styles.modal_wrapper }
+        >
           <div
-            className={styles.modal_content}
-            style={{ maxWidth }}>
-            {children}
+            className={ styles.modal_content }
+            style={ { maxWidth } }
+          >
+            { children }
             <button
-              ref={closeModalButtonRef}
-              className={styles.modal_close}
-              onClick={handleClose}>
+              ref={ closeModalButtonRef }
+              className={ styles.modal_close }
+              onClick={ handleClose }
+            >
               <CloseIcon />
             </button>
           </div>

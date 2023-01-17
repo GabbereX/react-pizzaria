@@ -1,20 +1,21 @@
 import React, { FC, useEffect, useState } from 'react'
-import styles from './GoodsList.module.scss'
+import styles from './ProductList.module.scss'
 import { IPizza } from '../../../../core/models/IPizza'
 import { useAppDispatch, useAppSelector } from '../../../../core/hooks/redux'
 import { fieldsValuesState } from '../../../../core/store/reducers/fieldsValuesSlice'
 import Skeleton from '../../ui/Skeleton/Skeleton'
-import GoodsItem from '../../ordinary/GoodsItem/GoodsItem'
-import EmptyGoodsList from '../../simple/EmptyGoodsList/EmptyGoodsList'
+import ProductShortStory from '../../ordinary/ProductItem/ProductShortStory/ProductShortStory'
+import EmptyProductList from '../../simple/EmptyProductList/EmptyProductList'
 import { paramsState } from '../../../../core/store/reducers/paramsSlice'
 import { itemsPerPage } from '../../../../core/constants/navigationList'
+
 
 interface IData {
   data?: IPizza[]
   isFetching: boolean
 }
 
-const GoodsList: FC<IData> = ({ data, isFetching }) => {
+const ProductList: FC<IData> = ({ data, isFetching }) => {
   const [processedData, setProcessedData] = useState<IPizza[] | null>(null)
   const { search: searchValue, searchOption } =
     useAppSelector(fieldsValuesState)
@@ -48,7 +49,7 @@ const GoodsList: FC<IData> = ({ data, isFetching }) => {
             <Skeleton />
           ) : (
             processedData.map(item => (
-              <GoodsItem
+              <ProductShortStory
                 key={item.id}
                 data={item}
               />
@@ -60,10 +61,10 @@ const GoodsList: FC<IData> = ({ data, isFetching }) => {
           <Skeleton />
         </ul>
       ) : (
-        processedData?.length === 0 && <EmptyGoodsList />
+        processedData?.length === 0 && <EmptyProductList />
       )}
     </>
   )
 }
 
-export default GoodsList
+export default ProductList
