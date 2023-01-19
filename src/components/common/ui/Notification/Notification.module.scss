@@ -1,0 +1,30 @@
+.container {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 100;
+}
+
+.item {
+  width: 350px;
+  background: var(--white);
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.2);
+
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  & p {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+.bar {
+  height: 5px;
+  background: var(--orange);
+}

@@ -2,21 +2,24 @@ import React, { FC, ReactNode, useEffect, useState } from 'react'
 
 import Modal from '../../ui/Modal/Modal'
 
-import { useAppSelector } from '../../../../core/hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../../core/hooks/redux'
 import { orderState } from '../../../../core/store/reducers/orderSlice'
 
 import { thead } from '../../../../core/constants/basketOption'
 
-import styles from './Basket.module.scss'
 import BasketRow from './BasketRow'
 import ModalFooter from '../../simple/ModalFooter/ModalFooter'
 import CountUp from 'react-countup'
 import { IProduct } from '../../../../core/models/IOrder'
+import styles from './Basket.module.scss'
+import { generateId } from '../../../../core/utils/generateId'
+import { NotificationType } from '../../../../core/constants/notificationConsts'
 
 let oldTotalPrice: number | null = null
 
 const Basket: FC = () => {
   const { checkedProducts } = useAppSelector(orderState)
+  const { pushNotification } = useAppDispatch()
 
   const getTotalPrice = (products: IProduct[]): number =>
     products.reduce((acc, item) => acc + item.price, 0)
@@ -26,11 +29,22 @@ const Basket: FC = () => {
     useState<number>(getTotalPrice(checkedProducts) ?? 0)
 
   const submitApplication = (): void => {
+    setTimeout(() => {
+      pushNotification({
+        id: generateId(),
+        type: NotificationType.SEND_PRODUCTS
+      })
+    }, 150)
+
     setIsModalClose(true)
   }
 
   const renderBasketButton = (): ReactNode => (
-    <button className={ `${ styles.basket } orange-button` }>Корзина</button>
+    <button
+      className={ `${ styles.basket } orange-button` }
+    >
+      Корзина
+    </button>
   )
 
   const renderProductNotFound = (): ReactNode => (
@@ -52,7 +66,8 @@ const Basket: FC = () => {
       <tbody>
       {
         [ ...checkedProducts ]
-          .sort((prev, next) => prev.title.localeCompare(next.title))
+          .sort((prev, next) =>
+            prev.title.localeCompare(next.title))
           .map(product =>
             <BasketRow
               key={ product.id + product.sizes + product.types }
@@ -94,21 +109,23 @@ const Basket: FC = () => {
   }, [ checkedProducts ])
 
   return (
-    <Modal
-      id='cart-modal'
-      button={ renderBasketButton() }
-      title='Корзина'
-      maxWidth={ 630 }
-      isModalClose={ isModalClose }
-      footerChildren={ renderFooterModal() }
-      setIsModalClose={ setIsModalClose }
-    >
-      {
-        checkedProducts.length
-          ? renderTable()
-          : renderProductNotFound()
-      }
-    </Modal>
+    <>
+      <Modal
+        id='cart-modal'
+        button={ renderBasketButton() }
+        title='Корзина'
+        maxWidth={ 630 }
+        isModalClose={ isModalClose }
+        footerChildren={ renderFooterModal() }
+        setIsModalClose={ setIsModalClose }
+      >
+        {
+          checkedProducts.length
+            ? renderTable()
+            : renderProductNotFound()
+        }
+      </Modal>
+    </>
   )
 }
 

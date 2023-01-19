@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react'
+import React, { FC, ReactNode, useEffect } from 'react'
 import ModalRoot from '../ModalRoot/ModalRoot'
 import styles from './Modal.module.scss'
 import { getScrollWidth } from '../../../../core/utils/scrollWidth'
@@ -14,6 +14,8 @@ interface IModalProps {
   setIsModalClose?: (isModalClose: boolean) => void,
 }
 
+let scrollWidth: string = getScrollWidth()
+
 const Modal: FC<IModalProps> = ({
   id,
   children,
@@ -24,9 +26,9 @@ const Modal: FC<IModalProps> = ({
   isModalClose = false,
   setIsModalClose
 }) => {
-  const [ scrollWidth ] = useState<string>(getScrollWidth())
-
   const footer = document.getElementById('footer')
+  const notification = document.getElementById('notification-container')
+
   const footerPadding =
     `${ title ? '15px' : '0' } 15px ${ footerChildren ? '15px' : '0' }`
 
@@ -35,6 +37,10 @@ const Modal: FC<IModalProps> = ({
       footer.style.marginRight = '-' + scrollWidth
       footer.style.paddingRight = scrollWidth
     }
+
+    if (notification) {
+      notification.style.marginRight = scrollWidth
+    }
   }
 
   const handleClose = (): void => {
@@ -42,11 +48,19 @@ const Modal: FC<IModalProps> = ({
       footer.style.marginRight = ''
       footer.style.paddingRight = ''
     }
+
+    if (notification) {
+      notification.style.marginRight = ''
+    }
   }
 
   useEffect(() => {
     return () => setIsModalClose?.(false)
   }, [ isModalClose ])
+
+  useEffect(() => {
+    scrollWidth = getScrollWidth()
+  }, [])
 
   return (
     <ModalRoot

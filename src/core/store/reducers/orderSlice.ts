@@ -1,10 +1,10 @@
 import { IOrder, IProduct } from '../../models/IOrder'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
-import { checkForDoubles } from '../../utils/orderUtils'
+import { checkForDoubles, getProductsFromLocalStorage } from '../../utils/orderUtils'
 
 export const initialState: IOrder = {
-  checkedProducts: JSON.parse(localStorage.getItem('pizzaria_products') ?? '') || [],
+  checkedProducts: getProductsFromLocalStorage(),
   currentProduct: null
 }
 
