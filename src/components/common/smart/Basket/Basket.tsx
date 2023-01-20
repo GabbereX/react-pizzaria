@@ -31,7 +31,7 @@ const Basket: FC<IProps> = ({ button }) => {
   const getTotalPrice = (products: IProduct[]): number =>
     products.reduce((acc, item) => acc + item.price, 0)
 
-  const [ isModalClose, setIsModalClose ] = useState<boolean>(false)
+  const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
   const [ totalPrice, setTotalPrice ] =
     useState<number>(getTotalPrice(checkedProducts) ?? 0)
 
@@ -43,20 +43,12 @@ const Basket: FC<IProps> = ({ button }) => {
       })
     }, 150)
 
-    setIsModalClose(true)
+    setIsModalOpen(false)
 
     setTimeout(() => {
       deleteCheckedProducts()
     }, 300)
   }
-
-  const renderBasketButton = (): ReactNode => (
-    <button
-      className={ `${ styles.basket } orange-button` }
-    >
-      Корзина
-    </button>
-  )
 
   const renderProductNotFound = (): ReactNode => (
     <div className={ styles.not_found }>
@@ -91,7 +83,7 @@ const Basket: FC<IProps> = ({ button }) => {
   const renderFooterModal = () => (
     <ModalFooter
       resolveAction={ checkedProducts.length ? submitApplication : undefined }
-      cancelAction={ setIsModalClose }
+      cancelAction={ () => setIsModalOpen(false) }
       resolveText='Отправить заявку'
       canselText='Закрыть'
     >
@@ -121,14 +113,30 @@ const Basket: FC<IProps> = ({ button }) => {
 
   return (
     <>
+      {
+        !button
+          ? (
+            <button
+              className={ `${ styles.basket } orange-button` }
+              onClick={ () => setIsModalOpen(true) }
+            >
+              Корзина
+            </button>
+          )
+          : (
+            <div onClick={ () => setIsModalOpen(true) }>
+              { button }
+            </div>
+          )
+      }
+
       <Modal
         id='cart-modal'
-        button={ !button ? renderBasketButton() : button }
+        isModalOpen={ isModalOpen }
+        setIsModalOpen={ setIsModalOpen }
         title='Корзина'
         maxWidth={ 630 }
-        isModalClose={ isModalClose }
         footerChildren={ renderFooterModal() }
-        setIsModalClose={ setIsModalClose }
       >
         {
           checkedProducts.length

@@ -20,7 +20,7 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
   const handleStartInterval = (): void => {
     intervalRef.current = setInterval(() => {
       setScaleX(prev => (prev < 100 ? prev + 0.5 : prev))
-    }, 2000)
+    }, 20)
   }
 
   const handlePauseInterval = (): void => {
@@ -59,7 +59,10 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
         !isTypeSendProduct &&
         <Basket
           button={
-            <button className={ styles.cartButton }>
+            <button
+              className={ styles.cartButton }
+              onClick={ handlePauseInterval }
+            >
               Перейти в корзину
             </button>
           }
@@ -71,7 +74,6 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
       />
       <button
         className={ styles.closeButton }
-        onClick={ handleCloseNotification }
       >
         <CloseIcon />
       </button>

@@ -1,39 +1,35 @@
-import React, { FC, ReactNode, useEffect, useRef, useState } from 'react'
+import ReactDOM from 'react-dom'
+import React, { FC, ReactNode, useEffect, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 import CloseIcon from '../icons/CloseIcon/CloseIcon'
 
 import styles from './Modal.module.scss'
 import { getScrollWidth } from '../../../../core/utils/scrollWidth'
-import ReactDOM from 'react-dom'
 
 interface IModalRootProps {
   id: string
-  isOpen: boolean
-  button: ReactNode
   children: ReactNode
+  isModalOpen: boolean
+  setIsModalOpen: (isModalOpen: boolean) => void
   maxWidth?: number
   onOpen?: () => void
   onClose?: () => void
-  isModalClose?: boolean
 }
 
 let scrollWidth: string = getScrollWidth()
 
 const ModalRoot: FC<IModalRootProps> = ({
   id,
-  isOpen,
-  button,
+  isModalOpen,
+  setIsModalOpen,
   children,
   maxWidth = 500,
   onOpen,
-  onClose,
-  isModalClose = false
+  onClose
 }) => {
   const modalWrapperRef = useRef<HTMLDivElement>(null)
   const closeModalButtonRef = useRef<HTMLButtonElement>(null)
-
-  const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
 
   const handleOpen = (): void => {
     setIsModalOpen(true)
@@ -68,8 +64,8 @@ const ModalRoot: FC<IModalRootProps> = ({
   }, [])
 
   useEffect(() => {
-    isModalClose && handleClose()
-  }, [ isModalClose ])
+    isModalOpen ? handleOpen() : handleClose()
+  }, [ isModalOpen ])
 
   useEffect(() => {
     scrollWidth = getScrollWidth()
@@ -81,8 +77,6 @@ const ModalRoot: FC<IModalRootProps> = ({
 
   return ReactDOM.createPortal(
     <div id={ id }>
-      {/*<div onClick={ handleOpen }>{ button }</div>*/}
-
       <CSSTransition
         nodeRef={ modalWrapperRef }
         in={ isModalOpen }

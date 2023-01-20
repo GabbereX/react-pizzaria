@@ -5,13 +5,12 @@ import { getScrollWidth } from '../../../../core/utils/scrollWidth'
 
 interface IModalProps {
   id: string
-  button: ReactNode
+  isModalOpen: boolean
+  setIsModalOpen: (isModalOpen: boolean) => void
   children: ReactNode
   maxWidth?: number
   title?: string
   footerChildren?: ReactNode
-  isModalClose?: boolean
-  setIsModalClose?: (isModalClose: boolean) => void,
 }
 
 let scrollWidth: string = getScrollWidth()
@@ -19,12 +18,11 @@ let scrollWidth: string = getScrollWidth()
 const Modal: FC<IModalProps> = ({
   id,
   children,
-  button,
+  isModalOpen,
+  setIsModalOpen,
   maxWidth = 500,
   title,
-  footerChildren,
-  isModalClose = false,
-  setIsModalClose
+  footerChildren
 }) => {
   const footer = document.getElementById('footer')
   const notification = document.getElementById('notification-container')
@@ -55,21 +53,17 @@ const Modal: FC<IModalProps> = ({
   }
 
   useEffect(() => {
-    return () => setIsModalClose?.(false)
-  }, [ isModalClose ])
-
-  useEffect(() => {
     scrollWidth = getScrollWidth()
   }, [])
 
   return (
     <ModalRoot
       id={ id }
-      button={ button }
       maxWidth={ maxWidth }
       onOpen={ handleOpen }
       onClose={ handleClose }
-      isModalClose={ isModalClose }
+      isModalOpen={ isModalOpen }
+      setIsModalOpen={ setIsModalOpen }
     >
       {
         title &&

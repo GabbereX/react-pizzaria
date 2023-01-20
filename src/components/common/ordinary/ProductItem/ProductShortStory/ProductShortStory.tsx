@@ -1,9 +1,6 @@
 import { FC, ReactNode, useState } from 'react'
 import CountUp from 'react-countup'
 
-import Modal from '../../../ui/Modal/Modal'
-import ProductFullStory from '../ProductFullStory/ProductFullStory'
-
 import { useAppDispatch, useAppSelector } from '../../../../../core/hooks/redux'
 import { orderState } from '../../../../../core/store/reducers/orderSlice'
 
@@ -13,6 +10,8 @@ import styles from './ProductShortStory.module.scss'
 import ModalFooter from '../../../simple/ModalFooter/ModalFooter'
 import { generateId } from '../../../../../core/utils/generateId'
 import { NotificationType } from '../../../../../core/constants/notificationConsts'
+import ProductFullStory from '../ProductFullStory/ProductFullStory'
+import Modal from '../../../ui/Modal/Modal'
 
 interface IData {
   data: IPizza
@@ -25,7 +24,7 @@ const ProductShortStory: FC<IData> = ({ data }) => {
   const { currentProduct } = useAppSelector(orderState)
   const { pushCheckedProduct, pushNotification } = useAppDispatch()
 
-  const [ isModalClose, setIsModalClose ] = useState<boolean>(false)
+  const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
 
   const addProductToCart = (): void => {
     currentProduct && pushCheckedProduct(currentProduct)
@@ -44,21 +43,13 @@ const ProductShortStory: FC<IData> = ({ data }) => {
       })
     }, 150)
 
-    setIsModalClose(true)
+    setIsModalOpen(false)
   }
-
-  const renderOpenModalButton = (): ReactNode => (
-    <button
-      className={ `${ styles.order } orange-button` }
-    >
-      Заказать
-    </button>
-  )
 
   const renderFooterModal = (newPrice: number): ReactNode =>
     <ModalFooter
       resolveAction={ addProductToCart }
-      cancelAction={ setIsModalClose }
+      cancelAction={ () => setIsModalOpen(false) }
     >
       Стоимость:&#160;
       <CountUp
@@ -82,16 +73,21 @@ const ProductShortStory: FC<IData> = ({ data }) => {
         <p className={ styles.description }>{ description }</p>
         <div className={ styles.price }>
           <div className={ styles.cost }>от { price } ₽</div>
+          <button
+            className={ `${ styles.order } orange-button` }
+            onClick={ () => setIsModalOpen(true) }
+          >
+            Заказать
+          </button>
           <Modal
             id={ `goods-item-${ id }` }
-            button={ renderOpenModalButton() }
+            isModalOpen={ isModalOpen }
+            setIsModalOpen={ setIsModalOpen }
             title={ title }
             maxWidth={ 920 }
             footerChildren={
               renderFooterModal(currentProduct?.price || price)
             }
-            isModalClose={ isModalClose }
-            setIsModalClose={ setIsModalClose }
           >
             <ProductFullStory data={ data } />
           </Modal>

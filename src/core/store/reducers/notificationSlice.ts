@@ -13,6 +13,7 @@ const notificationSlice = createSlice({
     pushNotification(state, action: PayloadAction<INotification>) {
       state.notifications.push(action.payload)
     },
+
     deleteNotification(state, action: PayloadAction<number>) {
       state.notifications =
         state.notifications.filter(notification =>
