@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 import { INotification, INotificationState } from '../../models/INotification'
+import { NotificationType } from '../../constants/notificationConsts'
 
 export const initialState: INotificationState = {
   notifications: []
@@ -20,8 +21,16 @@ const notificationSlice = createSlice({
           notification.id !== action.payload)
     },
 
-    deleteAllNotifications(state) {
-      state.notifications = []
+    setSurplusNotification(state) {
+      state.notifications = state.notifications.map(notification =>
+        notification.type === NotificationType.ADD_TO_CART
+          ? { ...notification, isSurplus: true }
+          : notification)
+    },
+
+    deleteSurplusNotifications(state) {
+      state.notifications = state.notifications.filter(notification =>
+        notification.isSurplus !== true)
     }
   }
 })

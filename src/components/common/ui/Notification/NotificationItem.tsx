@@ -6,8 +6,8 @@ import { useAppDispatch } from '../../../../core/hooks/redux'
 import CloseIcon from '../icons/CloseIcon/CloseIcon'
 import Basket from '../../smart/Basket/Basket'
 
-const NotificationItem: FC<INotification> = ({ id, type, message }) => {
-  const { deleteNotification } = useAppDispatch()
+const NotificationItem: FC<INotification> = ({ id, type, message, isSurplus }) => {
+  const { deleteNotification, setSurplusNotification } = useAppDispatch()
 
   const [ isClose, setIsClose ] = useState<boolean>(false)
   const [ scaleX, setScaleX ] = useState<number>(0)
@@ -45,6 +45,10 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
     scaleX === 100 && handleCloseNotification()
   }, [ scaleX ])
 
+  useEffect(() => {
+    isSurplus && setVisibility(true)
+  }, [ isSurplus ])
+
   return (
     <div
       className={ `${ styles.item } ${ isClose ? styles.close : '' }` }
@@ -63,9 +67,8 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
           button={
             <button
               className={ styles.cartButton }
-              // onClick={ handlePauseInterval }
               onClick={ () => {
-                setVisibility(true)
+                setSurplusNotification()
                 handlePauseInterval()
               } }
             >
@@ -80,6 +83,7 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
       />
       <button
         className={ styles.closeButton }
+        onClick={ handleCloseNotification }
       >
         <CloseIcon />
       </button>

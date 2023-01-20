@@ -32,7 +32,7 @@ const ModalRoot: FC<IModalRootProps> = ({
   const modalWrapperRef = useRef<HTMLDivElement>(null)
   const closeModalButtonRef = useRef<HTMLButtonElement>(null)
 
-  const { deleteAllNotifications } = useAppDispatch()
+  const { deleteSurplusNotifications } = useAppDispatch()
 
   const handleOpen = (): void => {
     setIsModalOpen(true)
@@ -55,16 +55,13 @@ const ModalRoot: FC<IModalRootProps> = ({
     onClose?.()
   }
 
+  const handleClick = (e: MouseEvent) =>
+    e.target === modalWrapperRef.current ? handleClose() : false
+
   useEffect(() => {
     scrollWidth = getScrollWidth()
-    const handleClick = (e: MouseEvent) =>
-      e.target === modalWrapperRef.current ? handleClose() : false
 
     document.addEventListener('mousedown', handleClick)
-
-    return () => {
-      document.removeEventListener('mousedown', handleClick)
-    }
   }, [])
 
   useEffect(() => {
@@ -86,7 +83,10 @@ const ModalRoot: FC<IModalRootProps> = ({
         exit: styles.modal_exit,
         exitActive: styles.modal_exit_active
       } }
-      // onExited={ () => deleteAllNotifications() }
+      onExited={ () => {
+        document.removeEventListener('mousedown', handleClick)
+        deleteSurplusNotifications()
+      } }
       unmountOnExit
     >
       <div
