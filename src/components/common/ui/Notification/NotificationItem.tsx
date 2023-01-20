@@ -1,54 +1,80 @@
-import { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import styles from './Notification.module.scss'
 import { NotificationType } from '../../../../core/constants/notificationConsts'
 import { INotification } from '../../../../core/models/INotification'
 import { useAppDispatch } from '../../../../core/hooks/redux'
+import CloseIcon from '../icons/CloseIcon/CloseIcon'
+import Basket from '../../smart/Basket/Basket'
 
-const NotificationItem: FC<INotification> = ({ id, type }) => {
+const NotificationItem: FC<INotification> = ({ id, type, message }) => {
   const { deleteNotification } = useAppDispatch()
 
-  const [ width, setWidth ] = useState<number>(0)
-  const [ intervalId, setIntervalId ] = useState<NodeJS.Timer | null>(null)
+  const [ isClose, setIsClose ] = useState<boolean>(false)
+  const [ scaleX, setScaleX ] = useState<number>(0)
 
-  const handleStartTimer = (): void => {
-    const intervalIndex = setInterval(() => {
-      setWidth(prev => prev < 100 ? prev + 0.5 : prev)
-    }, 20)
+  const intervalRef = useRef<NodeJS.Timer | null>(null)
 
-    console.log(intervalIndex)
+  const isTypeSendProduct =
+    type === NotificationType.SEND_PRODUCTS
 
-    setIntervalId(intervalIndex)
+  const handleStartInterval = (): void => {
+    intervalRef.current = setInterval(() => {
+      setScaleX(prev => (prev < 100 ? prev + 0.5 : prev))
+    }, 2000)
   }
 
-  const handlePauseTimer = (): void => {
-    intervalId && clearTimeout(intervalId)
+  const handlePauseInterval = (): void => {
+    intervalRef.current && clearInterval(intervalRef.current)
+  }
+
+  const handleCloseNotification = () => {
+    setIsClose(true)
+    setTimeout(() => deleteNotification(id), 200)
   }
 
   useEffect(() => {
-    handleStartTimer()
+    handleStartInterval()
+
+    return () => {
+      handlePauseInterval()
+    }
   }, [])
 
   useEffect(() => {
-    width === 100 && deleteNotification(id)
-  }, [ width ])
+    scaleX === 100 && handleCloseNotification()
+  }, [ scaleX ])
 
   return (
     <div
-      className={ styles.item }
-      onMouseEnter={ handlePauseTimer }
-      onMouseLeave={ handleStartTimer }
+      className={ `${ styles.item } ${ isClose ? styles.close : '' }` }
+      onMouseEnter={ handlePauseInterval }
+      onMouseLeave={ handleStartInterval }
     >
       <p>
-        {
-          type === NotificationType.SEND_PRODUCTS
-            ? `Отправлено на обработку`
-            : 'Продукт добавлен в корзину'
-        }
+        { isTypeSendProduct
+          ? 'Ваш заказ успешно отправлен на обработку'
+          : `Пицца "${ message }" добавлена в корзину` }
       </p>
+      {
+        !isTypeSendProduct &&
+        <Basket
+          button={
+            <button className={ styles.cartButton }>
+              Перейти в корзину
+            </button>
+          }
+        />
+      }
       <div
         className={ styles.bar }
-        style={ { width: `${ width }%` } }
+        style={ { transform: `scaleX(${ scaleX }%)` } }
       />
+      <button
+        className={ styles.closeButton }
+        onClick={ handleCloseNotification }
+      >
+        <CloseIcon />
+      </button>
     </div>
   )
 }

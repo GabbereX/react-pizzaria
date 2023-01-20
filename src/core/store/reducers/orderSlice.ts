@@ -42,6 +42,10 @@ const orderSlice = createSlice({
         !isDouble(product))
     },
 
+    deleteCheckedProducts(state) {
+      state.checkedProducts = []
+    },
+
     editCheckedProduct(state, action: PayloadAction<IProduct>) {
       const isDouble = checkForDoubles(action.payload)
 

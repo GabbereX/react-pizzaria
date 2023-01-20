@@ -15,11 +15,18 @@ import styles from './Basket.module.scss'
 import { generateId } from '../../../../core/utils/generateId'
 import { NotificationType } from '../../../../core/constants/notificationConsts'
 
+interface IProps {
+  button?: ReactNode
+}
+
 let oldTotalPrice: number | null = null
 
-const Basket: FC = () => {
+const Basket: FC<IProps> = ({ button }) => {
   const { checkedProducts } = useAppSelector(orderState)
-  const { pushNotification } = useAppDispatch()
+  const {
+    pushNotification,
+    deleteCheckedProducts
+  } = useAppDispatch()
 
   const getTotalPrice = (products: IProduct[]): number =>
     products.reduce((acc, item) => acc + item.price, 0)
@@ -37,6 +44,10 @@ const Basket: FC = () => {
     }, 150)
 
     setIsModalClose(true)
+
+    setTimeout(() => {
+      deleteCheckedProducts()
+    }, 300)
   }
 
   const renderBasketButton = (): ReactNode => (
@@ -112,7 +123,7 @@ const Basket: FC = () => {
     <>
       <Modal
         id='cart-modal'
-        button={ renderBasketButton() }
+        button={ !button ? renderBasketButton() : button }
         title='Корзина'
         maxWidth={ 630 }
         isModalClose={ isModalClose }

@@ -11,6 +11,8 @@ import { IPizza } from '../../../../../core/models/IPizza'
 
 import styles from './ProductShortStory.module.scss'
 import ModalFooter from '../../../simple/ModalFooter/ModalFooter'
+import { generateId } from '../../../../../core/utils/generateId'
+import { NotificationType } from '../../../../../core/constants/notificationConsts'
 
 interface IData {
   data: IPizza
@@ -21,12 +23,27 @@ let oldPrice: number | null = null
 const ProductShortStory: FC<IData> = ({ data }) => {
   const { imageUrl, title, description, price, id } = data
   const { currentProduct } = useAppSelector(orderState)
-  const { pushCheckedProduct } = useAppDispatch()
+  const { pushCheckedProduct, pushNotification } = useAppDispatch()
 
   const [ isModalClose, setIsModalClose ] = useState<boolean>(false)
 
   const addProductToCart = (): void => {
     currentProduct && pushCheckedProduct(currentProduct)
+
+    setTimeout(() => {
+      if (!currentProduct) return
+      const { sizes: curentSizes, types: curentTypes } = currentProduct
+      pushNotification({
+        id: generateId(),
+        type: NotificationType.ADD_TO_CART,
+        message: `
+          ${ title },
+          ${ curentSizes },
+          ${ curentTypes === 0 ? 'тонкое тесто' : 'толстое тесто' }
+        `
+      })
+    }, 150)
+
     setIsModalClose(true)
   }
 

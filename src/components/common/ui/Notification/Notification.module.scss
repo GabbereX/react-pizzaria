@@ -6,20 +6,27 @@
 }
 
 .item {
-  width: 350px;
+  width: 300px;
   background: var(--white);
   border-radius: 7px;
   overflow: hidden;
   box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.2);
+  animation: SlideLeft 0.2s;
+  animation-fill-mode: forwards;
+
+  &.close {
+    animation: SlideRight 0.2s;
+    animation-fill-mode: forwards;
+  }
 
   &:not(:last-child) {
     margin-bottom: 15px;
   }
 
   & p {
-    padding: 10px;
-    font-size: 18px;
-    font-weight: 700;
+    padding: 30px 15px 20px;
+    font-size: 14px;
+    font-weight: 600;
     text-align: center;
   }
 }
@@ -27,4 +34,57 @@
 .bar {
   height: 5px;
   background: var(--orange);
+
+  transform-origin: left;
+  transition: transform 0.1s ease;
+}
+
+.closeButton {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  padding: 0;
+  background: transparent;
+
+  & svg {
+    width: 14px;
+  }
+}
+
+.cartButton {
+  display: block;
+  margin: -5px auto 20px;
+  padding: 7px 5px 5px 5px;
+  background: transparent;
+  color: var(--orange);
+
+  border: 1px solid var(--orange);
+  border-radius: 7px;
+
+  transition-property: color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+
+  &:hover {
+    color: var(--red);
+    border-color: var(--red);
+  }
+}
+
+@keyframes SlideLeft {
+  0% {
+    transform: translateY(500px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes SlideRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(500px);
+  }
 }

@@ -5,9 +5,11 @@ import CloseIcon from '../icons/CloseIcon/CloseIcon'
 
 import styles from './Modal.module.scss'
 import { getScrollWidth } from '../../../../core/utils/scrollWidth'
+import ReactDOM from 'react-dom'
 
 interface IModalRootProps {
   id: string
+  isOpen: boolean
   button: ReactNode
   children: ReactNode
   maxWidth?: number
@@ -20,6 +22,7 @@ let scrollWidth: string = getScrollWidth()
 
 const ModalRoot: FC<IModalRootProps> = ({
   id,
+  isOpen,
   button,
   children,
   maxWidth = 500,
@@ -72,9 +75,13 @@ const ModalRoot: FC<IModalRootProps> = ({
     scrollWidth = getScrollWidth()
   }, [])
 
-  return (
+  const node = document.getElementById('modal')
+
+  if (!node) return null
+
+  return ReactDOM.createPortal(
     <div id={ id }>
-      <div onClick={ handleOpen }>{ button }</div>
+      {/*<div onClick={ handleOpen }>{ button }</div>*/}
 
       <CSSTransition
         nodeRef={ modalWrapperRef }
@@ -107,7 +114,8 @@ const ModalRoot: FC<IModalRootProps> = ({
           </div>
         </div>
       </CSSTransition>
-    </div>
+    </div>,
+    node
   )
 }
 

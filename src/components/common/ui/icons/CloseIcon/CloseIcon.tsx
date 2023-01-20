@@ -8,7 +8,7 @@ const Close: FC = () => {
       version='1.1'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 252 252'
-      className={styles.close}
+      className={ styles.close }
       fill=''>
       <path
         d='M126,0C56.523,0,0,56.523,0,126s56.523,126,126,126s126-56.523,126-126S195.477,0,126,0z M126,234
