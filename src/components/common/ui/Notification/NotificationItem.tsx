@@ -11,6 +11,7 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
 
   const [ isClose, setIsClose ] = useState<boolean>(false)
   const [ scaleX, setScaleX ] = useState<number>(0)
+  const [ visibility, setVisibility ] = useState<boolean>(false)
 
   const intervalRef = useRef<NodeJS.Timer | null>(null)
 
@@ -48,7 +49,8 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
     <div
       className={ `${ styles.item } ${ isClose ? styles.close : '' }` }
       onMouseEnter={ handlePauseInterval }
-      onMouseLeave={ handleStartInterval }
+      onMouseLeave={ () => !visibility && handleStartInterval() }
+      style={ { visibility: visibility ? 'hidden' : 'visible' } }
     >
       <p>
         { isTypeSendProduct
@@ -61,7 +63,11 @@ const NotificationItem: FC<INotification> = ({ id, type, message }) => {
           button={
             <button
               className={ styles.cartButton }
-              onClick={ handlePauseInterval }
+              // onClick={ handlePauseInterval }
+              onClick={ () => {
+                setVisibility(true)
+                handlePauseInterval()
+              } }
             >
               Перейти в корзину
             </button>

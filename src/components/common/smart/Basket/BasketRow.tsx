@@ -22,6 +22,7 @@ const BasketRow: FC<IProps> = ({ product }) => {
   const { deleteCheckedProduct, editCheckedProduct } = useAppDispatch()
 
   useEffect(() => {
+    count !== countState &&
     editCheckedProduct({
       ...product,
       count: countState,
