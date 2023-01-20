@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-pizzaria/static/css/main.29753c7e.css",
-    "main.js": "/react-pizzaria/static/js/main.6459c8ad.js",
+    "main.js": "/react-pizzaria/static/js/main.15efd358.js",
     "static/media/montserrat-extrabold.woff": "/react-pizzaria/static/media/montserrat-extrabold.907a0e71857f0f0dcbd1.woff",
     "static/media/montserrat-bold.woff": "/react-pizzaria/static/media/montserrat-bold.a0476d747c0f6e070c17.woff",
     "static/media/montserrat-regular.woff": "/react-pizzaria/static/media/montserrat-regular.2ca0efcf677a8acec59e.woff",
@@ -13,10 +13,10 @@
     "static/media/logo.svg": "/react-pizzaria/static/media/logo.6ad9d135ec23beab2443751a4cfdc34e.svg",
     "index.html": "/react-pizzaria/index.html",
     "main.29753c7e.css.map": "/react-pizzaria/static/css/main.29753c7e.css.map",
-    "main.6459c8ad.js.map": "/react-pizzaria/static/js/main.6459c8ad.js.map"
+    "main.15efd358.js.map": "/react-pizzaria/static/js/main.15efd358.js.map"
   },
   "entrypoints": [
     "static/css/main.29753c7e.css",
-    "static/js/main.6459c8ad.js"
+    "static/js/main.15efd358.js"
   ]
 }
