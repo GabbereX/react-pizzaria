@@ -2,9 +2,9 @@
 
 Онлайн пиццерия на ReactJS
 ---
-#[DEMO](https://gabberex.github.io/react-pizzaria)
+# [DEMO](https://gabberex.github.io/react-pizzaria)
 ---
-##Основной стек:
+## Основной стек:
 - JavaScript / TypeScript
 - React
 - React Router Dom
