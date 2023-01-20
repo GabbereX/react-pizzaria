@@ -12,11 +12,10 @@ import NotFoundPage from '../pages/NotFoundPage'
 
 export const AppRoute: FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/react-pizzaria'>
       <Header />
       <Routes>
         <Route
-          path='/react-pizzaria/'
           element={ <Main /> }>
           <Route
             path='/'
