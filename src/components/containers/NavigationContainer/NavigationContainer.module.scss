@@ -1,0 +1,29 @@
+.item {
+  margin-right: 15px;
+}
+
+.link {
+  position: relative;
+  color: var(--black);
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s ease;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--orange);
+    transition: width 0.4s ease;
+  }
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
+  &:active {
+    color: var(--orange);
+  }
+}

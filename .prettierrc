@@ -1,0 +1,14 @@
+{
+  "trailingComma": "none",
+  "formatOnSave": true,
+  "formatOnPaste": true,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "arrowParens": "avoid",
+  "printWidth": 80,
+  "bracketSpacing": true,
+  "bracketSameLine": true,
+  "singleAttributePerLine": true
+}

@@ -1,0 +1,57 @@
+.modal {
+  &_enter {
+    opacity: 0;
+    transform: scale(0.9);
+
+    &_active {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 300ms, transform 300ms;
+    }
+  }
+
+  &_exit {
+    opacity: 1;
+
+    &_active {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 300ms, transform 300ms;
+    }
+  }
+
+  &_wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: rgb(0%, 0%, 0%, 0.5);
+    cursor: pointer;
+  }
+
+  &_content {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    padding: 15px 0;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    cursor: initial;
+  }
+
+  &_close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    padding: 0;
+    line-height: 0;
+    background: none;
+    border: none;
+    & svg {
+      width: 18px;
+    }
+  }
+}

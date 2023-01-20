@@ -1,0 +1,63 @@
+.count {
+  position: relative;
+  padding: 0;
+
+  width: 25px;
+  height: 25px;
+
+  font-size: 18px;
+  font-weight: 400;
+
+  border: 1px solid var(--red);
+  border-radius: 50%;
+
+  &:active {
+    background: var(--orange);
+    border: 1px solid var(--orange);
+    transform: none;
+  }
+
+  & > span {
+    position: absolute;
+  }
+
+  &:first-child span {
+    left: 35%;
+    top: 2px;
+  }
+
+  &:last-child span {
+    left: 27%;
+    top: 3px;
+  }
+
+  & + span.count_number {
+    margin: 0;
+    padding-top: 4px;
+    width: 30px;
+    font-size: 18px;
+    text-align: center;
+  }
+}
+
+.count_small {
+  width: 15px;
+  height: 15px;
+
+  font-size: 14px;
+
+  &:first-child span {
+    left: 31%;
+    top: -2px;
+  }
+
+  &:last-child span {
+    left: 17%;
+    top: -1px;
+  }
+
+  & + span.count_number {
+    width: 25px;
+    font-size: 14px;
+  }
+}

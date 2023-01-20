@@ -1,0 +1,55 @@
+.input {
+  padding: 10px 10px;
+  height: 30px;
+  font-family: 'Montserrat', sans-serif, Arial, Helvetica;
+  color: var(--middle-gray);
+  border: 1px solid var(--light-gray);
+  border-radius: 7px;
+  transition: box-shadow 0.3s ease;
+  z-index: 0;
+  &:hover {
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1) inset;
+  }
+  &:focus {
+    outline: none;
+  }
+  &__container {
+    position: relative;
+    width: 100%;
+  }
+  &__label {
+    position: absolute;
+    left: 10px;
+    top: 33.5%;
+    pointer-events: none;
+    transition: top 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  }
+  &:focus ~ &__label,
+  &:valid ~ &__label {
+    top: 0;
+    transform: scale(0.8) translate(-8px, -20px);
+  }
+  &:focus ~ &__label--visible,
+  &:valid ~ &__label--visible {
+    opacity: 0.7;
+  }
+  &:focus ~ &__label--hidden,
+  &:valid ~ &__label--hidden {
+    opacity: 0;
+  }
+  &__focus-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    background: var(--orange);
+    transition: width 0.4s ease;
+    z-index: 1;
+  }
+  &:focus ~ &__focus-line {
+    width: 100%;
+  }
+}

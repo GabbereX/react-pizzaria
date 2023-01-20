@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+}
+
+.image {
+  padding-right: 15px;
+  width: 500px;
+}
+
+.delimiter {
+  margin: -15px 15px -15px;
+  border-right: 1px solid var(--light-gray);
+}
+
+.description {
+  margin-bottom: 25px;
+  font-size: 16px;
+  text-align: center;
+
+  &_container {
+    position: relative;
+  }
+}
+
+.checked_button {
+  border-radius: 4px;
+
+  &:not(:last-child) {
+    margin-right: 7px;
+  }
+
+  &_active {
+    color: #fff;
+    background: var(--red);
+  }
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--light-gray);
+
+  & span {
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+}
+
+.price {
+  position: absolute;
+  right: 0;
+  bottom: 0
+}

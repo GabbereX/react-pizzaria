@@ -1,0 +1,14 @@
+.shop {
+  &SortAndFilter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}
+
+.container, .section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+}

@@ -1,0 +1,10 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+.idea
+.DS_store
+/node_modules
+/dist
+/trash
+# Editor-based HTTP Client requests
+/httpRequests/

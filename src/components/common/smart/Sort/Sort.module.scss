@@ -1,0 +1,18 @@
+.sort {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-weight: 600;
+  &Checked {
+    min-width: 106px;
+    max-width: 106px;
+    font-size: inherit;
+    color: var(--orange);
+    text-decoration: underline dotted;
+    background: none;
+    transition: color 0.3s ease;
+    &:hover {
+      color: var(--red);
+    }
+  }
+}
